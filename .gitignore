@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/BTL_Web_Nhom7/config/applicationhost.config
+/.vs/BTL_Web_Nhom7/v17/.suo
+/BTL_Web_Nhom7/bin/Debug/net7.0
+/BTL_Web_Nhom7/obj/Debug/net7.0
+/BTL_Web_Nhom7/BTL_Web_Nhom7.csproj.user
