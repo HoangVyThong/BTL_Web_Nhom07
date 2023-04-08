@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Sanphamtheoloai";
+    Layout = "~/Views/Shared/_LayoutBanHang.cshtml";
+}
+
+<section class="breacrumb">
+    <div class="container">
+        <div style=" background: linear-gradient(#3c3f99 0%, #41409e 20%); padding: 15px 10px;">
+            <img src="https://img.icons8.com/material-outlined/20/000000/home--v2.png" /> @Html.ActionLink("Trang chủ", "TrangChu")
+            <img src="https://img.icons8.com/metro/20/000000/chevron-right.png" />@Html.ActionLink("Danh mục","Sanphamtheoloai")
+            <img src="https://img.icons8.com/metro/20/000000/chevron-right.png" />@Html.ActionLink("Loai", "Sanphamtheoloai")
+        </div>
+    </div>
+</section>
+<section class="homeproducts">
+    <div class="container">
+        @{
+            for (int i = 0; i < 3; i++)
+            {
+                <div class="~/Ảnh-row">
+                    <h2 class="homeproducts-title"><a href="#">@(i+1)</a></h2>
+                    <div class="row">
+                        @{
+                            for (int j = 1; j < 5; j++)
+                            {
+
+                                <div class="col-md-3 productsbox">
+                                    <div class="btn05">
+                                        <div class="productsbox-img"><a href="@Url.Action("ChiTietSanPham", "TrangChu")"><img src="#" /></a></div>
+                                        <div class="ovrly"></div>
+                                        <div class="buttons">
+                                            <a href="@Url.Action("ChiTietSanPham", "TrangChu")" class="fa fa-link">
+                                            </a>
+                                            <a href="#" class="fa fa-search"></a>
+                                        </div>
+                                    </div>
+                                    <h3 class="productsbox-name">
+                                        <a href="@Url.Action("ChiTietSanPham", "TrangChu")">
+                                            @( i * 4+j)
+                                        </a>
+                                    </h3>
+                                    <div class="productsbox-price"><div class="price-goc">3,599,000 VNĐ</div> <div class="price-dis">4,000,000 VNĐ</div></div>
+                                </div>
+
+                            }
+                        }
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</section>
+

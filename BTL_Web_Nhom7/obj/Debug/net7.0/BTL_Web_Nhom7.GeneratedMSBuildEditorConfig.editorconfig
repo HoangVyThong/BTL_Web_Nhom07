@@ -16,6 +16,50 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\Code\Web\BTL_Web_Nhom7\BTL_Web_Nhom7
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/BanHang/ChiTietSanPham.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFuSGFuZ1xDaGlUaWV0U2FuUGhhbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/BanHang/Danhmuc.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFuSGFuZ1xEYW5obXVjLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/BanHang/DanhMucSP.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFuSGFuZ1xEYW5oTXVjU1AuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/BanHang/Loai.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFuSGFuZ1xMb2FpLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/BanHang/LoaiDanhmuc.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFuSGFuZ1xMb2FpRGFuaG11Yy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/BanHang/LoaiSanPham.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFuSGFuZ1xMb2FpU2FuUGhhbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/BanHang/LoaiSP.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFuSGFuZ1xMb2FpU1AuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/BanHang/Sanphamtheoloai.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFuSGFuZ1xTYW5waGFtdGhlb2xvYWkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/BanHang/Sanphamtungloai.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFuSGFuZ1xTYW5waGFtdHVuZ2xvYWkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/BanHang/SearchResults.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFuSGFuZ1xTZWFyY2hSZXN1bHRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/BanHang/TrangChu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFuSGFuZ1xUcmFuZ0NodS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -24,12 +68,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/Shared/Components/DanhMucMenu/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcRGFuaE11Y01lbnVcRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/Shared/_LayoutBanHang.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRCYW5IYW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/_PartialSanPham.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1BhcnRpYWxTYW5QaGFtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/_ViewImports.cshtml]

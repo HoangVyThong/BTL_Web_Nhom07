@@ -1,0 +1,8 @@
+﻿@using BTL_Web_Nhom7.Models
+@model  LoaiThietBi
+<div class="~/Ảnh-row">
+    <h2 class="homeproducts-title"><a href="@Url.Action("LoaiSanPham","BanHang", new { @MaLoai = Model.MaLoai})">@Model.TenLoai</a></h2>
+    <div class="row">
+        <a asp-controller="BanHang" asp-action="Sanphamtungloai"></a>
+    </div>
+</div>

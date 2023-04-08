@@ -1,0 +1,118 @@
+﻿<!DOCTYPE>
+<html lang="vi" xml:lang="vi">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <title>Trung tâm mua bán Thiết bị y tế</title>
+
+    <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfKXA6HCKoxduVb5Wwxs48PL9HH8w9EvbfnA&usqp=CAU" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../Content/Data/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Content/Data/main.css" rel="stylesheet" />
+    <link href="../Content/Data/menu.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <header>
+        <div class="topheader">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 logo"><a href="@Url.Action("TrangChu","BanHang")"> <img src="~/Ảnh/logobtl.png" /></a></div>
+                    <div class="col-md-5">
+                        <div class="search">
+                            @using (Html.BeginForm("SearchResults", "BanHang"))
+                            {
+                                <form>
+
+                                    @Html.TextBox("timkiem", "", htmlAttributes: new { @class = "form-control", @placeholder = "Nhập sản phẩm bạn cần tìm vào đây" })
+                                    <button type="submit">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                        </svg>
+                                    </button>
+                                </form>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-4 mobi-header">
+                        <div class="hotline">
+                            <span class="text-normal">Đường dây nóng</span>
+                            <span class="phone-number">0916966713(Mr.Thông)</span>
+                        </div>
+
+                        <div class="addcart">
+
+                            <div id="mini_shopping_cart">
+                               @* <span id="basketTitleWrap">@Html.Action("GioHangPartial", "GioHang") </span>*@
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hotline" style="position: absolute; padding: 20px 0; padding-top: 20px; padding-right: 50px; padding-bottom: 20px; padding-left: 0px; margin-top: 15px;right:0;left:unset;">
+                <span style="float:right"><a href="@Url.Action("Dangnhap","Admin")">Đăng nhập</a></span>
+            </div>
+        </div>
+        <div class="menuheader">
+            <div class="container">
+                <nav class="nav">
+                    <ul class="nav-list">
+                        @await Component.InvokeAsync("DanhMucMenu")
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </header>
+    <section>
+        @RenderBody()
+    </section>
+    <section>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="footer_title">HƯỚNG DẪN SỬ DỤNG</div>
+                                <ul class="footer-box">
+                                    <li><a href="#"> </a></li>
+
+                                </ul>
+                            </div>
+                            <div class="col-md-6 footer-thongtin">
+                                <div class="footer_title">CHÍNH SÁCH BÁN HÀNG</div>
+                                <ul class="footer-box">
+                                    <li><a href="#" title="Chính sách giao hàng">Chính sách giao hàng</a></li>
+                                    <li><a href="#" title="Chính sách bảo hành - đổi trả">Chính sách bảo hành - đổi trả</a></li>
+                                    <li><a href="#" title="Mua hàng  - Thanh toán">Mua hàng  - Thanh toán</a></li>
+                                    <li><a href="#" title="Bảo mật thông tin">Bảo mật thông tin</a></li>
+                                    <li><a href="#" title="Hướng dẫn đặt hàng">Hướng dẫn đặt hàng</a></li>
+                                    <li><a href="#" title="Hỗ trợ trả góp 0%">Hỗ trợ trả góp 0%</a></li>
+                                </ul>
+                                <div>
+                                    <a href="#"><img src="~/Ảnh/dathongbao.png" height="107px" /></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-5 footer-thongtin">
+                        <div class="footer_title">THIẾT BỊ Y TẾ </div>
+                        <p>Địa chỉ :</p>
+                        <p>Giấy phép kinh doanh : </p>
+                        <p>Tel:   Fax: </p>
+                        <p>HOTLINE : </p>
+                        <p>Email : </p>
+                        <p>Website : </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+</body>
+</html>

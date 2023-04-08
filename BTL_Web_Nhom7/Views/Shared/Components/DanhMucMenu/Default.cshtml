@@ -1,0 +1,108 @@
+﻿@using BTL_Web_Nhom7.Models
+@model List<DanhMuc>
+    <!-- Loại 1 -->
+    <li class="nav-item">
+        <span class="nav-click">
+            <i class="nav-arrow"></i>
+        </span>
+        <a href="@Url.Action("DanhMucSP","BanHang")">@Model[0].TenDanhMuc</a>
+        <ul class="nav-submenu">
+        @foreach(var i1 in ViewBag.DM1)
+        {
+            <li class="nav-submenu-item">
+                <a href="@Url.Action("LoaiSanPham","BanHang", new { @MaLoai = i1.MaLoai})">@i1.TenLoai</a>
+            </li>
+        }
+        </ul>
+    </li>
+    <!-- Loại 2 -->
+    <li class="nav-item">
+        <span class="nav-click">
+            <i class="nav-arrow"></i>
+        </span>
+        <a href="@Url.Action("DanhMucSP","BanHang")">@Model[1].TenDanhMuc</a>
+        <ul class="nav-submenu">
+        @foreach (var i2 in ViewBag.DM2)
+        {
+                <li class="nav-submenu-item">
+                    <a href="@Url.Action("LoaiSanPham","BanHang", new { @MaLoai = i2.MaLoai})">@i2.TenLoai</a>
+                </li>
+        }
+        </ul>
+    </li>
+    <!-- Loại 3 -->
+    <li class="nav-item">
+        <span class="nav-click">
+            <i class="nav-arrow"></i>
+        </span>
+        <a href="@Url.Action("DanhMucSP","BanHang")">@Model[2].TenDanhMuc</a>
+        <ul class="nav-submenu">
+        @foreach (var i3 in ViewBag.DM3)
+        {
+                <li class="nav-submenu-item">
+                    <a href="@Url.Action("LoaiSanPham","BanHang", new { @MaLoai = i3.MaLoai})">@i3.TenLoai</a>
+                </li>
+        }
+        </ul>
+    </li>
+    <!-- Loại 4 -->
+    <li class="nav-item">
+        <span class="nav-click">
+            <i class="nav-arrow"></i>
+        </span>
+        <a href="@Url.Action("DanhMucSP","BanHang")">@Model[3].TenDanhMuc</a>
+        <ul class="nav-submenu">
+            @foreach (var i4 in ViewBag.DM4)
+            {
+                <li class="nav-submenu-item">
+                    <a href="@Url.Action("LoaiSanPham","BanHang", new { @MaLoai = i4.MaLoai})">@i4.TenLoai</a>
+                </li>
+            }
+        </ul>
+    </li>
+    <!-- Loại 5 -->
+    <li class="nav-item">
+        <span class="nav-click">
+            <i class="nav-arrow"></i>
+        </span>
+        <a href="@Url.Action("DanhMucSP","BanHang")">@Model[4].TenDanhMuc</a>
+        <ul class="nav-submenu">
+            @foreach (var i5 in ViewBag.DM5)
+            {
+                <li class="nav-submenu-item">
+                    <a href="@Url.Action("LoaiSanPham","BanHang", new { @MaLoai = i5.MaLoai})">@i5.TenLoai</a>
+                </li>
+            }
+        </ul>
+    </li>
+    <!-- Loại 6-->
+    <li class="nav-item">
+        <span class="nav-click">
+            <i class="nav-arrow"></i>
+        </span>
+        <a href="@Url.Action("DanhMucSP","BanHang")">@Model[5].TenDanhMuc</a>
+        <ul class="nav-submenu">
+            @foreach (var i6 in ViewBag.DM6)
+            {
+                <li class="nav-submenu-item">
+                    <a href="@Url.Action("LoaiSanPham","BanHang", new { @MaLoai = i6.MaLoai})">@i6.TenLoai</a>
+                </li>
+            }
+        </ul>
+    </li>
+    <!-- Loại 7-->
+    <li class="nav-item">
+        <span class="nav-click">
+            <i class="nav-arrow"></i>
+        </span>
+        <a href="@Url.Action("DanhMucSP","BanHang")">@Model[6].TenDanhMuc</a>
+        <ul class="nav-submenu">
+            @foreach (var i7 in ViewBag.DM7)
+            {
+                <li class="nav-submenu-item">
+                    <a href="@Url.Action("LoaiSanPham","BanHang", new { @MaLoai = i7.MaLoai})">@i7.TenLoai</a>
+                </li>
+            }
+        </ul>
+    </li>
+

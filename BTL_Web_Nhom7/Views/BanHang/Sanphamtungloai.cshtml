@@ -1,0 +1,42 @@
+﻿@using BTL_Web_Nhom7.Models;
+@model List<ThietBiYte>
+@{
+    foreach (var item in Model)
+    {
+        if (item.An == true)
+        {
+            continue;
+        }
+        Decimal? Giaban = item.GiaBan;
+        if (item.SoLuong == 0)
+        {
+            Giaban = -1;
+        }
+        String Gia = Giaban > 0 ? String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", item.GiaBan) : "Liên hệ!";
+        String ChietKhau = item.GiamGia > 0 ? item.GiamGia.ToString() + "%" : "";
+        if (item.GiamGia > 0 && Giaban > 0)
+        {
+            double t = (double)item.GiamGia;
+            double tien = (double)item.GiaBan * (1 - t);
+            Gia = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", tien);
+            ChietKhau = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", item.GiaBan);
+        }
+        <div class="col-md-3 productsbox">
+            <div class="btn05">
+                <div class="productsbox-img" style="height: 300px"><a href="@Url.Action("ChiTietSanPham", "BanHang", new {@MaSP = item.MaThietBi})"><img src="@item.Anh" title="@item.TenThietBi" style="max-height: 280px; min-height: 270px;"/></a></div>
+                <div class="ovrly"></div>
+                <div class="buttons">
+                    <a href="@Url.Action("ChiTietSanPham", "BanHang", new {@MaSP = item.MaThietBi})" class="fa fa-link">
+                    </a>
+                    <a href="#" class="fa fa-search"></a>
+                </div>
+            </div>
+            <h3 class="productsbox-name">
+                <a href="@Url.Action("ChiTietSanPham", "BanHang" , new {@MaSP = item.MaThietBi})">
+                    @item.TenThietBi
+                </a>
+            </h3>
+            <div class="productsbox-price"><div class="price-goc">@Gia</div> <div class="">@ChietKhau</div></div>
+        </div>
+    }
+}

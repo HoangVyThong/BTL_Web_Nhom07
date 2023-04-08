@@ -1,0 +1,14 @@
+﻿@using BTL_Web_Nhom7.Models
+@model DanhMuc
+@{
+    ViewBag.Title = "DanhMucSP";
+    Layout = "~/Views/Shared/_LayoutBH.cshtml";
+}
+
+
+<section class="homeproducts">
+    <div class="container">
+        <a asp-controller="BanHang" asp-action="LoaiDanhMuc" asp-route-MaDanhMuc="@Model.MaDanhMuc"></a>
+    </div>
+</section>
+

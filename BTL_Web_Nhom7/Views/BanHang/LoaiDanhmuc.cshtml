@@ -1,0 +1,11 @@
+﻿@using BTL_Web_Nhom7.Models
+@model  KeyValuePair<List<LoaiThietBi>, int>
+<div class="">
+    @{
+        foreach (var item in Model.Key)
+        {
+            <a asp-controller="BanHang" asp-action="LoaiSP" asp-route-MaLoaiSP="@item.MaLoai" asp-route-Sosp="@Model.Value"></a>
+        }
+    }
+</div>
+
