@@ -21,3 +21,6 @@
 /BTL_Web_Nhom7/obj/project.nuget.cache
 .vs/BTL_Web_Nhom7/FileContentIndex/7715927a-ca6d-43a9-a215-663e90e2e478.vsidx
 /.vs/BTL_Web_Nhom7/FileContentIndex
+/BTL_Web_Nhom7/bin/Debug/net6.0
+/BTL_Web_Nhom7/obj/Debug
+*.sentinel
