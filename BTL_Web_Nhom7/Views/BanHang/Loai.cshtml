@@ -1,0 +1,10 @@
+﻿@using BTL_Web_Nhom7.Models
+@model List<LoaiThietBi>
+@foreach (var item in Model)
+
+{
+    <li class="nav-submenu-item">
+        <a href="@Url.Action("LoaiSanPham","BanHang", new { @MaLoai = item.MaLoai})">@item.TenLoai</a>
+    </li>
+
+}

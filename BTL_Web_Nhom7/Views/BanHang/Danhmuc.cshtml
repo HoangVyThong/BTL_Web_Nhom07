@@ -1,0 +1,19 @@
+﻿@using BTL_Web_Nhom7.Models
+@model List<DanhMuc>
+@foreach (var item in Model)
+
+{
+
+<li class="nav-item">
+    <span class="nav-click">
+        <i class="nav-arrow"></i>
+    </span>
+    <a href="@Url.Action("DanhMucSP","BanHang", new { @MaDanhmuc = @item.MaDanhMuc })">@item.TenDanhMuc</a>
+
+    <ul class="nav-submenu">
+        <a asp-controller="BanHang" asp-action="Loai"></a>
+    </ul>
+</li>
+    
+}
+

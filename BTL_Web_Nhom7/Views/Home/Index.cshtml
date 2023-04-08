@@ -1,8 +1,59 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_LayoutBanHang.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@model List<DanhMuc>
+<section class="homeproducts">
+	<div class="container">
+		<div class="products-row">
+			<h2 class="homeproducts-title"><a href="./cham-soc-suc-khoe-gia-dinh.html" title="Chăm sóc sức khỏe gia đình">@Model[1].TenDanhMuc</a></h2>
+			
+			<div class="row">
+				@foreach(var i1 in ViewBag.sanPham1)
+				{
+					<div class="col-md-3 productsbox">
+						<div class="btn05">
+							<div class="productsbox-img"><a href="./may-do-duong-huyet-accu-chek-instant.html" title="Máy đo đường huyết Accu Chek Instant"><img src="products/accu chek instant.jpg" title="Máy đo đường huyết Accu Chek Instant" alt="Máy đo đường huyết Accu Chek Instant" data-alt-src="products/accu chek instant.jpg"></a></div>
+							<div class="ovrly"></div>
+							<div class="buttons">
+								<a href="./may-do-duong-huyet-accu-chek-instant.html" title="Máy đo đường huyết Accu Chek Instant" class="fa fa-link"></a>
+								<a href="#" class="fa fa-search"></a>
+							</div>
+						</div>
+						<h3 class="productsbox-name"><a href="./may-do-duong-huyet-accu-chek-instant.html" title="Máy đo đường huyết Accu Chek Instant">@i1.TenThietBi</a></h3>
+						<div class="productsbox-price"><div class="price-goc">949,000 VNĐ</div> <div class="price-dis">1,300,000 VNĐ</div></div>
+					</div>
+				}
+
+			</div>
+		</div>
+		
+		<div class="products-row">
+			<h2 class="homeproducts-title"><a href="./cham-soc-suc-khoe-gia-dinh.html" title="Chăm sóc sức khỏe gia đình">@Model[2].TenDanhMuc</a></h2>
+
+			<div class="row">
+				@foreach (var i2 in ViewBag.sanPham2)
+				{
+					<div class="col-md-3 productsbox">
+							<div class="btn05">
+								<div class="productsbox-img"><a href="./may-do-duong-huyet-accu-chek-instant.html" title="Máy đo đường huyết Accu Chek Instant"><img src="products/accu chek instant.jpg" title="Máy đo đường huyết Accu Chek Instant" alt="Máy đo đường huyết Accu Chek Instant" data-alt-src="products/accu chek instant.jpg"></a></div>
+								<div class="ovrly"></div>
+								<div class="buttons">
+									<a href="./may-do-duong-huyet-accu-chek-instant.html" title="Máy đo đường huyết Accu Chek Instant" class="fa fa-link"></a>
+									<a href="#" class="fa fa-search"></a>
+								</div>
+							</div>
+							<h3 class="productsbox-name"><a href="./may-do-duong-huyet-accu-chek-instant.html" title="Máy đo đường huyết Accu Chek Instant">@i2.TenThietBi</a></h3>
+							<div class="productsbox-price"><div class="price-goc">949,000 VNĐ</div> <div class="price-dis">1,300,000 VNĐ</div></div>
+					</div>
+				}
+
+			</div>
+		</div>
+
+	</div>
+</section>
+
+
+					

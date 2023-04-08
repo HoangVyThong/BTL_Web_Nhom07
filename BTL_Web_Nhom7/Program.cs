@@ -1,8 +1,14 @@
+using BTL_Web_Nhom7.Models;
+using BTL_Web_Nhom7.Repository;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+var connectionString = builder.Configuration.GetConnectionString("BtlWebContext");
+builder.Services.AddDbContext<BtlWebContext>(option => option.UseSqlServer(connectionString));
+builder.Services.AddScoped<IDanhMucRepository, DanhMucRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,6 +28,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=BanHang}/{action=TrangChu}/{id?}");
 
 app.Run();

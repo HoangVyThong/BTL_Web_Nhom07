@@ -1,0 +1,134 @@
+﻿@using BTL_Web_Nhom7.Models;
+@model ThietBiYte
+@{
+    ViewBag.Title = "ChiTietSanPham";
+    Layout = "~/Views/Shared/_LayoutBH.cshtml";
+}
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    var url = $"{HttpContextAccessor.HttpContext.Request.Scheme}://{HttpContextAccessor.HttpContext.Request.Host}{HttpContextAccessor.HttpContext.Request.Path}{HttpContextAccessor.HttpContext.Request.QueryString}";
+}
+<section class="breacrumb">
+    <div class="container">
+        <div style="background: linear-gradient(#3c3f99 0%, #41409e 20%); padding: 15px 10px; ">
+            <img src="https://img.icons8.com/material-outlined/20/000000/home--v2.png" style="vertical-align: sub;" /> @Html.ActionLink("Trang chủ", "TrangChu")
+            <img src="https://img.icons8.com/metro/20/000000/chevron-right.png" style="vertical-align: sub;" />@Html.ActionLink("Danh mục", "LoaiSanPham", new { MaLoai = Model.MaLoai })
+            <img src="https://img.icons8.com/metro/20/000000/chevron-right.png" style="vertical-align: sub;" />@Html.ActionLink("Loại", "LoaiSanPham", new { MaLoai = Model.MaLoai })
+            <img src="https://img.icons8.com/metro/20/000000/chevron-right.png" style="vertical-align: sub;" />@Html.ActionLink("Tên sản phẩm", "ChiTietSanPham", new { MaSP = Model.MaThietBi })
+        </div>
+    </div>
+</section>
+
+    <section class="productscate">
+        <div class="container">
+            <div class="row">
+                @using (Html.BeginForm("ThemGioHang", "GioHang", new { @MaThietBi = Model.MaThietBi, @strUrl = url.ToString()}))
+                {
+                    Decimal? Giaban = Model.GiaBan;
+                    if (Model.SoLuong == 0)
+                    {
+                        Giaban = -1;
+                    }
+                    String Gia = Giaban > 0 ? String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", Model.GiaBan) : "Liên Hệ!";
+                    String ChietKhau = Model.GiamGia > 0 ? Model.GiamGia.ToString() + "%" : "";
+                    if (Model.GiamGia > 0 && Giaban > 0)
+                    {
+                        double t = (double)Model.GiamGia;
+                        double tien = (double)Model.GiaBan * (1 - t);
+                        Gia = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", tien);
+                        ChietKhau = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", Model.GiaBan);
+                    }
+                    <div class="col-xs-12 col-sm-6 col-md-6 img-detail"><img src="@Model.Anh" style="min-height: 300px" /></div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 detail_content">
+                        <h1>@Model.TenThietBi</h1>
+                        <div class="detail_brief"></div>
+                        @{
+                            if (Giaban < 0)
+                            {
+                                <div class="productsbox-price">
+                                    <div class="price-goc">Liên hệ!</div>
+                                </div>
+                            }
+                            else
+                            {
+                                if (Giaban != 0)
+                                {
+                                    <div class="detail_price"><div class="detail-price-goc">@Gia </div> <div class="detail-price-dis">@ChietKhau</div></div>
+                                }
+                                else
+                                {
+                                    <div class="detail_price"><div class="detail-price-goc">@Gia</div></div>
+                                }
+                                <div class="qunty_cart">
+                                    <span class="button_soluong buttonsoluong">Số lượng :</span>
+                                    @Html.TextBox("Soluong", 1, new { type = "number", max = Model.SoLuong, min = 0 })
+                                    <div class="clear"></div>
+                                </div>
+                            }
+                        }
+                        <div class="productPriceWrapRight">
+                            @{
+                                if (Giaban < 0)
+                                {
+
+                                }
+                                else
+                                {
+                                    <button id="featuredProduct_581" class="button btn-cart buy-now-detail add_to_cart" type="submit" title="Mua hàng">
+                                        <span class="text-large">Mua hàng</span>
+                                    </button>
+                                }
+                            }
+
+                        </div>
+                        <div class="goituvan">
+                            <a class="button-call-now" type="button" href="tel:0918007475" style="background: linear-gradient(#3c3f99 0%, #41409e 20%);">
+                                <span class="text-large">Gọi ngay 0978594932</span>
+                                <span class="text-small hidden-sm hidden-xs hidden-md">Để nghe tư vấn sản phẩm nhanh, miễn phí</span>
+                            </a>
+                        </div>
+                    </div>
+                }
+
+                @using (Html.BeginForm("DanhGiaSanPham", "BanHang", new { @MaThietBi = Model.MaThietBi }))
+                {
+                    <div >
+                        @{
+                            if (ViewBag.KhongDanhGia != null)
+                            {
+                                <p>@ViewBag.KhongDanhGia</p>
+                            }
+                            if (ViewBag.SoDanhGia != null)
+                            {
+                                <p>@ViewBag.SoDanhGia </p>
+                            }
+
+                        }
+                    </div>
+                    <div >
+                        Đánh giá @Html.TextBox("DanhGia", 5, new { type = "number", max = 5, min = 1 })
+                        <input type="submit" value="Xác nhận đánh giá" class="btn btn-danger">
+                    </div>
+                }
+                </div>
+            <div class="detail_note">
+                <div class="detail_note_title"><i class="fa fa-th-list"></i> Chi tiết sản phẩm</div>
+                <div class="note">
+                    <p id="demo"></p>
+                    <script>
+                    @*var html = "<p><strong>M&aacute;y đo huyết &aacute;p Sinoheart BA-801</strong><br />Thương hiệu Sinocare nổi tiếng với c&aacute;c d&ograve;ng m&aacute;y đo sức khỏe đang l&agrave;m mưa l&agrave;m gi&oacute; tr&ecirc;n thị trường với mẫu m&aacute;y đo đường huyết Sinocare Safe Accu gi&aacute; rẻ phổ th&ocirc;ng m&agrave; chất lượng v&agrave; độ ch&iacute;nh x&aacute;c cao.</p><p>&nbsp;</p><p><img src='https://salt.tikicdn.com/cache/w750/ts/product/04/9a/f6/9b4da29cc5142f6b0f79bcd9e3aa60ff.jpg' /></p><p><img alt=' src='https://salt.tikicdn.com/ts/tmp/d5/69/59/19998ebca6502516d0f2df1d7f3cd364.jpg' /></p><p>Kh&ocirc;ng dừng lại ở đ&oacute; Sinocare c&ograve;n c&oacute; rất nhiều mặt h&agrave;ng thiết bị sức khỏe kh&aacute;c được h&atilde;ng chăm ch&uacute;t kĩ lưỡng, thừa hưỡng d&acirc;y chuyền c&ocirc;ng nghệ cao đến từ Đức, Sinocare kh&ocirc;ng ngừng mở rộng quy m&ocirc; tr&ecirc;n to&agrave;n cầu về c&aacute;c mặt h&agrave;ng gi&aacute; phổ th&ocirc;ng bất cứ ai cũng c&oacute; thể mua được dễ d&agrave;ng.</p><p>&nbsp;</p><p><img src='https://salt.tikicdn.com/cache/w750/ts/product/f2/ca/04/6e54b5b3e10d1ce9dc9969fb0e6db7dd.jpg' /></p><p>- M&aacute;y đo huyết &aacute;p Sinoheart BA-801 l&agrave; d&ograve;ng sản phẩm b&aacute;n chạy tr&ecirc;n to&agrave;n cầu. Với &ocirc;ng nghệ ho&agrave;n to&agrave;n vượt trội v&agrave; đặc biệt l&agrave; c&ocirc;ng nghệ ho&agrave;n to&agrave;n mới so với tất cả c&aacute;c d&ograve;ng m&aacute;y đo huyết &aacute;p tr&ecirc;n thị trường.</p><p>&nbsp;</p><p><img src='https://salt.tikicdn.com/cache/w750/ts/product/89/4c/7f/bc63fdfa5551497348b7274a9781f74f.jpg' /></p><p>- T&iacute;nh năng:90 bộ lưu trữ (2 người), IHB rối loạn nhịp tim ph&aacute;t hiện, bảng ph&acirc;n loại huyết &aacute;p của WHO. Intelligense tạo &aacute;p suất</p><p>&nbsp;</p><p><img src='https://salt.tikicdn.com/cache/w750/ts/product/0e/40/fe/6dba6cf64f58f8b1ea55ca153198f9ca.jpg' /></p><p>&nbsp;</p><ul> <li>M&aacute;y Đo Huyết &Aacute;p Bắp Tay Sinocare Sinoheart BA-801&nbsp;l&agrave; d&ograve;ng sản phẩm b&aacute;n chạy tr&ecirc;n to&agrave;n cầu.</li> <li>Với c&ocirc;ng nghệ ho&agrave;n to&agrave;n vượt trội v&agrave; đặc biệt l&agrave; c&ocirc;ng nghệ ho&agrave;n to&agrave;n mới so với tất cả c&aacute;c d&ograve;ng m&aacute;y đo huyết &aacute;p tr&ecirc;n thị trường.</li> <li>T&iacute;nh năng: 90 bộ lưu trữ (2 người), IHB rối loạn nhịp tim ph&aacute;t hiện, bảng ph&acirc;n loại huyết &aacute;p của WHO. Intellisense tạo &aacute;p suất.</li> <li>BA-801 thể hiện đầy đủ 3 chỉ số: huyết &aacute;p tối đa, tối thiểu, nhịp tim.</li> <li>Thao t&aacute;c đo đơn giản, độ ch&iacute;nh x&aacute;c cao, m&agrave;n h&igrave;nh to, dễ nh&igrave;n th&iacute;ch hợp cho người cao tuổi.</li> <li>L&agrave; sản phẩm đo tr&ecirc;n bắp tay n&ecirc;n ph&ugrave; hợp với mọi đối tượng đo ngay cả người bị tiểu đường lẫn xơ vữa động mạch.</li></ul><p>Th&ocirc;ng số kỹ thuật:</p><ul> <li>Chế độ đo: Phạm vi đo: Phạm vi &aacute;p suất: 0-37.3kpa (0-280mmhg)</li> <li>Xung phạm vi: 40-199 lần/ph&uacute;t</li> <li>Phạm vi sai số: &Aacute;p suất tĩnh: &plusmn;0. 4kpa (&plusmn; 3 mmHg) Xung: trong v&ograve;ng &plusmn; 5%</li> <li>Độ d&agrave;i của v&ograve;ng b&iacute;t: 24-34 cm (9.4-13.4 inch)</li> <li>Nguồn điện cung cấp: DC6V (1.5 V 4 pin AAA, kh&ocirc;ng bao gồm pin)</li> <li>Tự động tắt nguồn: 60s</li> <li>K&iacute;ch Thước: 110 x 95 x 90 mm</li> <li>Lưu trữ nhiệt độ v&agrave; độ ẩm: Nhiệt độ:-20-65 &deg;C Độ ẩm: 10%-90% RH</li> <li>Sử dụng nhiệt độ độ ẩm: Nhiệt độ: 5-40 &deg;C Độ ẩm: 10%-90% RH</li></ul><p>Bộ sản phẩm bao gồm:</p><ul> <li>1 x M&aacute;y Huyết &aacute;p</li> <li>1 x V&ograve;ng B&iacute;t</li> <li>1 x Hướng dẫn sử dụng</li> <li>1 x 4 pin AA</li></ul> ";
+
+                    document.getElementById("demo").innerHTML = html;*@
+                    </script>
+                    @Html.Raw(Model.ChiTiet)
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+

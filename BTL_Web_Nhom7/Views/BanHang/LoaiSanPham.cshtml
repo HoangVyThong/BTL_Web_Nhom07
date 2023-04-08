@@ -1,0 +1,19 @@
+﻿@using BTL_Web_Nhom7.Models
+@model LoaiThietBi
+@{
+    ViewBag.Title = "LoaiSanPham";
+    Layout = "~/Views/Shared/_LayoutBH.cshtml";
+}
+
+<section class="homeproducts">
+    <div class="container">
+        <div class="~/Ảnh-row">
+            <h2 class="homeproducts-title"><a href="@Url.Action("TrangChu","BanHang")">@Model.TenLoai</a></h2>
+            <div class="row">
+                <a asp-controller="BanHang" asp-action="Sanphamtungloai" asp-route-MaLoai="@Model.MaLoai"></a>
+            </div>
+        </div>
+
+    </div>
+</section>
+

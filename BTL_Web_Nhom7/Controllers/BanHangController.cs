@@ -8,16 +8,93 @@ namespace BTL_Web_Nhom7.Controllers
     {
         // GET: Index
         BtlWebContext db = new BtlWebContext();
-        public ActionResult TrangChu()
+        public IActionResult TrangChu()
         {
-            return View(db.DanhMucs.ToList());
+			var danhMucs = db.DanhMucs.ToList();
+            var sanPham1 = (from p in db.ThietBiYtes
+                          join q in db.LoaiThietBis on p.MaLoai equals q.MaLoai
+                          where q.MaDanhMuc == "DM1"
+                          select new
+                          {
+                              MaThietBi = p.MaThietBi,
+                              TenThietBi = p.TenThietBi,
+                              Anh = p.Anh
+                          }).Take(4).ToList();
+			var sanPham2 = (from p in db.ThietBiYtes
+							join q in db.LoaiThietBis on p.MaLoai equals q.MaLoai
+							where q.MaDanhMuc == "DM2"
+							select new
+							{
+								MaThietBi = p.MaThietBi,
+								TenThietBi = p.TenThietBi,
+								Anh = p.Anh
+							}).Take(4).ToList();
+			var sanPham3 = (from p in db.ThietBiYtes
+							join q in db.LoaiThietBis on p.MaLoai equals q.MaLoai
+							where q.MaDanhMuc == "DM3"
+							select new
+							{
+								MaThietBi = p.MaThietBi,
+								TenThietBi = p.TenThietBi,
+								Anh = p.Anh
+							}).Take(4).ToList();
+			var sanPham4 = (from p in db.ThietBiYtes
+							join q in db.LoaiThietBis on p.MaLoai equals q.MaLoai
+							where q.MaDanhMuc == "DM4"
+							select new
+							{
+								MaThietBi = p.MaThietBi,
+								TenThietBi = p.TenThietBi,
+								Anh = p.Anh
+							}).Take(4).ToList();
+			var sanPham5 = (from p in db.ThietBiYtes
+							join q in db.LoaiThietBis on p.MaLoai equals q.MaLoai
+							where q.MaDanhMuc == "DM5"
+							select new
+							{
+								MaThietBi = p.MaThietBi,
+								TenThietBi = p.TenThietBi,
+								Anh = p.Anh
+							}).Take(4).ToList();
+			var sanPham6 = (from p in db.ThietBiYtes
+							join q in db.LoaiThietBis on p.MaLoai equals q.MaLoai
+							where q.MaDanhMuc == "DM6"
+							select new
+							{
+								MaThietBi = p.MaThietBi,
+								TenThietBi = p.TenThietBi,
+								Anh = p.Anh
+							}).Take(4).ToList();
+			var sanPham7 = (from p in db.ThietBiYtes
+							join q in db.LoaiThietBis on p.MaLoai equals q.MaLoai
+							where q.MaDanhMuc == "DM7"
+							select new
+							{
+								MaThietBi = p.MaThietBi,
+								TenThietBi = p.TenThietBi,
+								Anh = p.Anh
+							}).Take(4).ToList();
+			ViewBag.sanPham1 = sanPham1;
+			ViewBag.sanPham2 = sanPham2;
+			ViewBag.sanPham3 = sanPham3;
+			ViewBag.sanPham4 = sanPham4;
+			ViewBag.sanPham5 = sanPham5;
+			ViewBag.sanPham6 = sanPham6;
+			ViewBag.sanPham7 = sanPham7;
+			return View(danhMucs);
         }
-        public ActionResult DanhMucSP(String MaDanhMuc)
+        public IActionResult DanhMucSP(String MaDanhMuc)
         {
             var t = db.DanhMucs.SingleOrDefault(n => n.MaDanhMuc == MaDanhMuc);
             return View(t);
         }
-        public ActionResult LoaiSanPham(String MaLoai = "L1")
+
+        public PartialViewResult Menu()
+        {
+            var danhMuc = db.DanhMucs.ToList();
+            return PartialView(danhMuc);
+        }
+        public IActionResult LoaiSanPham(String MaLoai = "L1")
         {
             var t = db.ThietBiYtes.SingleOrDefault(n => n.MaLoai == MaLoai);
             return View(t);
@@ -42,7 +119,7 @@ namespace BTL_Web_Nhom7.Controllers
 
             return View(thietBi);
         }
-        public ActionResult DanhGiaSanPham(string MaThietBi, string DanhGia)
+        public IActionResult DanhGiaSanPham(string MaThietBi, string DanhGia)
         {
             MaThietBi = MaThietBi.Split(')')[0];
             var thietBi = db.ThietBiYtes.SingleOrDefault(n => n.MaThietBi == MaThietBi);
@@ -51,7 +128,7 @@ namespace BTL_Web_Nhom7.Controllers
             db.SaveChanges();
             return RedirectToAction("ChiTietSanPham", new { MaSP = MaThietBi });
         }
-        public ActionResult Sanphamtheoloai()
+        public IActionResult Sanphamtheoloai()
         {
             return View();
         }
@@ -68,16 +145,13 @@ namespace BTL_Web_Nhom7.Controllers
         }
         public PartialViewResult Loai(String MaDanhmuc)
         {
-
             var listLoai = db.LoaiThietBis.Where(n => n.MaDanhMuc == MaDanhmuc).OrderBy(n => n.TenLoai).ToList();
-
             return PartialView(listLoai);
         }
         public PartialViewResult LoaiSP(String MaLoaiSP = "L1")
         {
             var loai = db.ThietBiYtes.SingleOrDefault(n => n.MaLoai == MaLoaiSP);
             return PartialView(loai);
-
         }
         public PartialViewResult Sanphamtungloai(String MaLoai, int Sosp = 0)
         {
@@ -90,7 +164,7 @@ namespace BTL_Web_Nhom7.Controllers
             }
             return PartialView(listSP);
         }
-        public ActionResult TimKiem(FormCollection f)
+        public IActionResult TimKiem(FormCollection f)
         {
             string t = f["timkiem"];
             var thietBiYTes = db.ThietBiYtes.Where(n => n.TenThietBi.Contains(t)).ToList();
@@ -98,7 +172,7 @@ namespace BTL_Web_Nhom7.Controllers
         }
 
         [HttpPost]
-        public ActionResult SearchResults(FormCollection f, int? page)
+        public IActionResult SearchResults(FormCollection f, int? page)
         {
             string searchkey = f["timkiem"].ToString();
             var lstSearchResults = db.ThietBiYtes.Where(n => n.TenThietBi.Contains(searchkey)).ToList();
@@ -116,7 +190,7 @@ namespace BTL_Web_Nhom7.Controllers
             return View(lstSearchResults.OrderBy(n => n.TenThietBi).ToPagedList(pagenumber, pagesize));
         }
         [HttpGet]
-        public ActionResult SearchResults(int? page, string searchkey)
+        public IActionResult SearchResults(int? page, string searchkey)
         {
             ViewBag.keyword = searchkey;
             var lstSearchResults = db.ThietBiYtes.Where(n => n.TenThietBi.Contains(searchkey)).ToList();
@@ -125,7 +199,7 @@ namespace BTL_Web_Nhom7.Controllers
             if (lstSearchResults.Count == 0)
             {
                 ViewBag.ThongBao = "Không tìm thấy sản phẩm bạn tìm kiếm";
-                //nếu không tìm thấy sản phẩm nào thì xuất ra toàn bộ sản phẩm
+                //nếu không tìm thấy sản phẩm nào thì xuất ra toàn bộ sản phẩm7
                 return View(db.ThietBiYtes.OrderBy(n => n.TenThietBi).ToPagedList(pagenumber, pagesize));
             }
             ViewBag.ThongBao = "Đã tìm thấy " + lstSearchResults.Count + "  sản phẩm";

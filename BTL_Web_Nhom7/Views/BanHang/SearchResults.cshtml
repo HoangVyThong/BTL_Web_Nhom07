@@ -1,0 +1,68 @@
+﻿@using BTL_Web_Nhom7.Models;
+@using X.PagedList.Mvc.Core;
+@model X.PagedList.PagedList<ThietBiYte>
+
+@{
+    ViewBag.Title = "SearchResults";
+    Layout = "~/Views/Shared/_LayoutBH.cshtml";
+}
+
+<section class="homeproducts">
+    <div class="container">
+        <h1 style="font-size: 24px; color: blue; margin-bottom: 10px;">@ViewBag.ThongBao </h1>
+        <div class="">
+            <div class="~/Ảnh-row">
+                <div class="row">
+                    @{
+
+                        int i = 0;
+                        foreach (var item in Model)
+                        {
+                            i++;
+                            if (item.An == true)
+                            {
+                                continue;
+                            }
+                            String Gia = item.GiaBan > 0 ? String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", item.GiaBan) : "Call!";
+                            String ChietKhau = item.GiamGia > 0 ? item.GiamGia.ToString() + "%" : "";
+                            if (item.GiamGia > 0 && item.GiaBan > 0)
+                            {
+                                double t = (double)item.GiamGia;
+                                double tien = (double)item.GiaBan * (1 - t);
+                                Gia = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", tien);
+                                ChietKhau = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", item.GiaBan);
+                            }
+
+                            <div class="col-md-3 productsbox">
+                                <div class="btn05">
+                                    <div class="productsbox-img" style="height: 300px"><a href="@Url.Action("ChiTietSanPham", "BanHang", new {@MaSP = item.MaThietBi})"><img src="@item.Anh" title="@item.TenThietBi"/></a></div>
+                                    <div class="ovrly"></div>
+                                    <div class="buttons">
+                                        <a href="@Url.Action("ChiTietSanPham", "BanHang", new {@MaSP = item.MaThietBi})" class="fa fa-link">
+                                        </a>
+                                        <a href="#" class="fa fa-search"></a>
+                                    </div>
+                                </div>
+                                <h3 class="productsbox-name">
+                                    <a href="@Url.Action("ChiTietSanPham", "BanHang" , new {@MaSP = item.MaThietBi})">
+                                        @item.TenThietBi
+                                    </a>
+                                </h3>
+                                <div class="productsbox-price"><div class="price-goc">@Gia</div> <div class="">@ChietKhau</div></div>
+                                @*<div class="productsbox-price"><div class="price-goc">@Gia</div> <div class="price-dis">@ChietKhau</div></div>*@
+                            </div>
+                            if (i % 4 == 0)
+                            {
+                                <div style="clear: both"> </div>
+                            }
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@Html.PagedListPager(Model, page => Url.Action("DanhMucSanPham", new {page=page}), new X.PagedList.Web.Common.PagedListRenderOptions(){
+    LiElementClasses = new List<String> {"page-item"},
+    PageClasses = new List<String> {"page-link"}
+})
