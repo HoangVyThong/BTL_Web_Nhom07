@@ -6,11 +6,11 @@
 		public string? MaLoai { get; set; }
 
 		public string? TenThietBi { get; set; }
+        public string? TenLoai { get; set; }
+        public string? GioiThieu { get; set; }
+        public decimal? GiaBan { get; set; }
+        public double? GiamGia { get; set; }
 
-		public string? GioiThieu { get; set; }
-
-		public decimal? GiaBan { get; set; }
-
-		public string? Anh { get; set; }
+        public string? Anh { get; set; }
 	}
 }
