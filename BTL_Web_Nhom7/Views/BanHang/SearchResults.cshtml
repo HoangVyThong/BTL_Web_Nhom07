@@ -4,7 +4,7 @@
 
 @{
     ViewBag.Title = "SearchResults";
-    Layout = "~/Views/Shared/_LayoutBH.cshtml";
+    Layout = "~/Views/Shared/_LayoutBanHang.cshtml";
 }
 
 <section class="homeproducts">
@@ -35,16 +35,16 @@
 
                             <div class="col-md-3 productsbox">
                                 <div class="btn05">
-                                    <div class="productsbox-img" style="height: 300px"><a href="@Url.Action("ChiTietSanPham", "BanHang", new {@MaSP = item.MaThietBi})"><img src="@item.Anh" title="@item.TenThietBi"/></a></div>
+                                    <div class="productsbox-img" style="height: 300px"><a asp-controller="BanHang" asp-action="ChiTietSanPham" asp-route-MaSP="@item.MaThietBi"><img src="@item.Anh" title="@item.TenThietBi" /></a></div>
                                     <div class="ovrly"></div>
                                     <div class="buttons">
-                                        <a href="@Url.Action("ChiTietSanPham", "BanHang", new {@MaSP = item.MaThietBi})" class="fa fa-link">
+                                        <a asp-controller="BanHang" asp-action="ChiTietSanPham" asp-route-MaSP="@item.MaThietBi" class="fa fa-link">
                                         </a>
                                         <a href="#" class="fa fa-search"></a>
                                     </div>
                                 </div>
                                 <h3 class="productsbox-name">
-                                    <a href="@Url.Action("ChiTietSanPham", "BanHang" , new {@MaSP = item.MaThietBi})">
+                                    <a asp-controller="BanHang" asp-action="ChiTietSanPham" asp-route-MaSP="@item.MaThietBi">
                                         @item.TenThietBi
                                     </a>
                                 </h3>
