@@ -172,7 +172,7 @@ namespace BTL_Web_Nhom7.Controllers
         }
 
         [HttpPost]
-        public IActionResult SearchResults(FormCollection f, int? page)
+        public IActionResult SearchResults(IFormCollection f, int? page)
         {
             string searchkey = f["timkiem"].ToString();
             var lstSearchResults = db.ThietBiYtes.Where(n => n.TenThietBi.Contains(searchkey)).ToList();
