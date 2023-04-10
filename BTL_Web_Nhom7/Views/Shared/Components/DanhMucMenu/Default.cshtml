@@ -1,17 +1,21 @@
 ﻿@using BTL_Web_Nhom7.Models
 @model List<DanhMuc>
     <!-- Loại 1 -->
+<script src="../Content/Data/js/jquery.js"></script>
+
     <li class="nav-item">
         <span class="nav-click">
             <i class="nav-arrow"></i>
         </span>
-        <a href="@Url.Action("DanhMucSP","BanHang")">@Model[0].TenDanhMuc</a>
+    @{
+        var getUrlDM = "https://localhost:7120/api/ProductAPI/DanhMuc/" + Model[0].MaDanhMuc;}
+    <a style="cursor:pointer" onclick="showProductByCategory('@getUrlDM', '@Model[0].TenDanhMuc')">@Model[0].TenDanhMuc</a>
         <ul class="nav-submenu">
         @foreach(var i1 in ViewBag.DM1)
         {
             var getUrl = "https://localhost:7120/api/ProductAPI/" + @i1.MaLoai;
             <li class="nav-submenu-item">
-                <a style="cursor:pointer" onclick="showProductByCategory('@getUrl','@i1.TenLoai')">@i1.TenLoai</a>
+                <a style="cursor:pointer" onclick="showProductByMaLoai('@getUrl','@i1.TenLoai')">@i1.TenLoai</a>
             </li>
         }
         </ul>
@@ -21,7 +25,8 @@
         <span class="nav-click">
             <i class="nav-arrow"></i>
         </span>
-        <a href="@Url.Action("DanhMucSP","BanHang")">@Model[1].TenDanhMuc</a>
+        @{var getUrlDM1 = "https://localhost:7120/api/ProductAPI/DanhMuc/" + Model[1].MaDanhMuc;}
+    <a style="cursor:pointer" onclick="showProductByCategory('@getUrlDM1', '@Model[1].TenDanhMuc')">@Model[1].TenDanhMuc</a>
         <ul class="nav-submenu">
         @foreach (var i2 in ViewBag.DM2)
         {
@@ -30,7 +35,7 @@
                 </li>*@
                 var getUrl = "https://localhost:7120/api/ProductAPI/" + @i2.MaLoai;
             <li class="nav-submenu-item">
-                <a style="cursor:pointer" onclick="showProductByCategory('@getUrl','@i2.TenLoai')">@i2.TenLoai</a>
+                <a style="cursor:pointer" onclick="showProductByMaLoai('@getUrl','@i2.TenLoai')">@i2.TenLoai</a>
             </li>
         }
         </ul>
@@ -40,13 +45,14 @@
         <span class="nav-click">
             <i class="nav-arrow"></i>
         </span>
-        <a href="@Url.Action("DanhMucSP","BanHang")">@Model[2].TenDanhMuc</a>
+       @{ var getUrlDM2 = "https://localhost:7120/api/ProductAPI/DanhMuc/" + Model[2].MaDanhMuc;}
+    <a style="cursor:pointer" onclick="showProductByCategory('@getUrlDM2', '@Model[2].TenDanhMuc')">@Model[2].TenDanhMuc</a>
         <ul class="nav-submenu">
         @foreach (var i3 in ViewBag.DM3)
         {
                 var getUrl = "https://localhost:7120/api/ProductAPI/" + @i3.MaLoai;
             <li class="nav-submenu-item">
-                <a style="cursor:pointer" onclick="showProductByCategory('@getUrl','@i3.TenLoai')">@i3.TenLoai</a>
+                <a style="cursor:pointer" onclick="showProductByMaLoai('@getUrl','@i3.TenLoai')">@i3.TenLoai</a>
             </li>
         }
         </ul>
@@ -56,13 +62,14 @@
         <span class="nav-click">
             <i class="nav-arrow"></i>
         </span>
-        <a href="@Url.Action("DanhMucSP","BanHang")">@Model[3].TenDanhMuc</a>
+    @{var getUrlDM3 = "https://localhost:7120/api/ProductAPI/DanhMuc/" + Model[3].MaDanhMuc;}
+    <a style="cursor:pointer" onclick="showProductByCategory('@getUrlDM3', '@Model[3].TenDanhMuc')">@Model[3].TenDanhMuc</a>
         <ul class="nav-submenu">
             @foreach (var i4 in ViewBag.DM4)
             {
                 var getUrl = "https://localhost:7120/api/ProductAPI/" + @i4.MaLoai;
             <li class="nav-submenu-item">
-                <a style="cursor:pointer" onclick="showProductByCategory('@getUrl','@i4.TenLoai')">@i4.TenLoai</a>
+                <a style="cursor:pointer" onclick="showProductByMaLoai('@getUrl','@i4.TenLoai')">@i4.TenLoai</a>
             </li>
             }
         </ul>
@@ -72,12 +79,13 @@
         <span class="nav-click">
             <i class="nav-arrow"></i>
         </span>
-        <a href="@Url.Action("DanhMucSP","BanHang")">@Model[4].TenDanhMuc</a>
+    @{var getUrlDM4 = "https://localhost:7120/api/ProductAPI/DanhMuc/" + Model[4].MaDanhMuc;}
+    <a style="cursor:pointer" onclick="showProductByCategory('@getUrlDM4', '@Model[4].TenDanhMuc')">@Model[4].TenDanhMuc</a>
         <ul class="nav-submenu">
             @foreach (var i5 in ViewBag.DM5)
             {var getUrl = "https://localhost:7120/api/ProductAPI/" + @i5.MaLoai;
             <li class="nav-submenu-item">
-                <a style="cursor:pointer" onclick="showProductByCategory('@getUrl','@i5.TenLoai')">@i5.TenLoai</a>
+                <a style="cursor:pointer" onclick="showProductByMaLoai('@getUrl','@i5.TenLoai')">@i5.TenLoai</a>
             </li>
             }
         </ul>
@@ -87,13 +95,14 @@
         <span class="nav-click">
             <i class="nav-arrow"></i>
         </span>
-        <a href="@Url.Action("DanhMucSP","BanHang")">@Model[5].TenDanhMuc</a>
+        @{var getUrlDM5 = "https://localhost:7120/api/ProductAPI/DanhMuc/" + Model[5].MaDanhMuc;}
+    <a style="cursor:pointer" onclick="showProductByCategory('@getUrlDM5', '@Model[5].TenDanhMuc')">@Model[5].TenDanhMuc</a>
         <ul class="nav-submenu">
             @foreach (var i6 in ViewBag.DM6)
             {
                 var getUrl = "https://localhost:7120/api/ProductAPI/" + @i6.MaLoai;
             <li class="nav-submenu-item">
-                <a style="cursor:pointer" onclick="showProductByCategory('@getUrl','@i6.TenLoai')">@i6.TenLoai</a>
+                <a style="cursor:pointer" onclick="showProductByMaLoai('@getUrl','@i6.TenLoai')">@i6.TenLoai</a>
             </li>
             }
         </ul>
@@ -103,20 +112,21 @@
         <span class="nav-click">
             <i class="nav-arrow"></i>
         </span>
-        <a href="@Url.Action("DanhMucSP","BanHang")">@Model[6].TenDanhMuc</a>
+    @{var getUrlDM6 = "https://localhost:7120/api/ProductAPI/DanhMuc/" + Model[6].MaDanhMuc;}
+    <a style="cursor:pointer" onclick="showProductByCategory('@getUrlDM6', '@Model[6].TenDanhMuc')">@Model[6].TenDanhMuc</a>
         <ul class="nav-submenu">
             @foreach (var i7 in ViewBag.DM7)
             {
                var getUrl = "https://localhost:7120/api/ProductAPI/" + @i7.MaLoai;
             <li class="nav-submenu-item">
-                <a style="cursor:pointer" onclick="showProductByCategory('@getUrl','@i7.TenLoai')">@i7.TenLoai</a>
+                <a style="cursor:pointer" onclick="showProductByMaLoai('@getUrl','@i7.TenLoai')">@i7.TenLoai</a>
             </li>
             }
         </ul>
     </li>
-    <script src="../Content/Data/js/jquery.js"></script>
+    
     <script>
-     function showProductByCategory(getUrl,tendanhmuc){
+     function showProductByMaLoai(getUrl,tendanhmuc){
         var str='';
         jQuery.ajax({
             type:'GET',
@@ -154,4 +164,44 @@
         });
     }
 
-</script>
+    function showProductByCategory(getUrl, tendanhmuc) {
+        var str = '';
+        jQuery.ajax({
+            type: 'GET',
+            url: getUrl,
+            dataType: 'json',
+            success: function (data) {
+                str += `<div class="products-row">`
+                str += `<h2 class="homeproducts-title"><a href="./cham-soc-suc-khoe-gia-dinh.html" title="Chăm sóc sức khỏe gia đình">${tendanhmuc}</a></h2>`
+                $.each(data, function (key, val) {
+
+                    str += `<div class="col-md-3 productsbox">`
+                    str += `<div class="btn05">
+                                <div class="productsbox-img">
+                                    <a href="./may-do-duong-huyet-accu-chek-instant.html" title="Máy đo đường huyết Accu Chek Instant">
+                                        <img src="${val.anh}" title="Máy đo đường huyết Accu Chek Instant" alt="Máy đo đường huyết Accu Chek Instant" data-alt-src="${val.anh}"></a></div>
+                                <div class="ovrly"></div>
+                                <div class="buttons">
+                                    <a href="./may-do-duong-huyet-accu-chek-instant.html" title="Máy đo đường huyết Accu Chek Instant" class="fa fa-link"></a>
+                                    <a href="#" class="fa fa-search"></a>
+                                </div>
+                            </div>
+                            <h3 class="productsbox-name"><a href="./may-do-duong-huyet-accu-chek-instant.html" title="Máy đo đường huyết Accu Chek Instant">${val.tenThietBi}</a></h3>
+                            <div class="productsbox-price"><div class="price-goc">949,000 VNĐ</div> <div class="price-dis">1,300,000 VNĐ</div></div>`
+                    str += `</div>`
+
+                });
+                str += `</div>`
+
+                $('#ele-for-render-ajax').html(str);
+            },
+
+            Erorr: function (xhr) {
+                alert(xhr.responseText)
+            }
+        });
+    }
+
+    </script>
+
+    
