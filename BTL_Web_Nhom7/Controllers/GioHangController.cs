@@ -68,14 +68,14 @@ namespace BTL_Web_Nhom7.Controllers
                 {
                     gioHang.SoLuong += soluong;
                     string jsoncart = JsonConvert.SerializeObject(gioHangs);
-                    session.SetString("GioHang", jsoncart);
+                    session.SetString(CARTKEY, jsoncart);
                 }
 
                 else
                 {
                     gioHang.SoLuong = (int)sanpham.SoLuong;
                     string jsoncart = JsonConvert.SerializeObject(gioHangs);
-                    session.SetString("GioHang", jsoncart);
+                    session.SetString(CARTKEY, jsoncart);
                 }
 
             }
@@ -170,19 +170,15 @@ namespace BTL_Web_Nhom7.Controllers
             {
                 return RedirectToAction("TrangChu", "BanHang");
             }
-            var gioHangs = HttpContext.Session.GetString("GioHang");
+            List<GioHang> gioHangs = GetCartItems();
             ViewBag.TongTien = TongTien();
             ViewBag.SoLuong = TongSoLuong();
-            return View(JsonConvert.DeserializeObject<List<GioHang>>(gioHangs));
+            return View(gioHangs);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ThanhToan(FormCollection f)
+        public ActionResult ThanhToan(IFormCollection f)
         {
-            if (HttpContext.Session.GetString("GioHang") == null)
-            {
-                return RedirectToAction("TrangChu", "BanHang");
-            }
             List<GioHang> lstGioHang = GetCartItems();
             foreach (var item in lstGioHang)
             {
