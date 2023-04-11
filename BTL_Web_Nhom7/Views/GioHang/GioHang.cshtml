@@ -1,0 +1,100 @@
+﻿@using BTL_Web_Nhom7.Models;
+@model List<GioHang>
+@{
+    ViewData["Title"] = "GioHang";
+    Layout = "~/Views/Shared/_LayoutBanHang.cshtml";
+}
+
+<section class="breacrumb">
+    <div class="container">
+        <div style=" background: linear-gradient(#3c3f99 0%, #41409e 20%); padding: 15px 10px;">
+            <img src="https://img.icons8.com/material-outlined/20/000000/home--v2.png" style="vertical-align: sub;" /> @Html.ActionLink("Trang chủ", "TrangChu", "BanHang", null, null)
+           <img src="https://img.icons8.com/metro/20/000000/chevron-right.png" style="vertical-align: sub;" /> @Html.ActionLink("Chi tiết giỏ hàng", "GioHang")
+       </div>
+    </div>
+</section>
+<section class="productscate">
+    <div class="container">
+        @{
+            if (Model == null)
+            {
+                <tr>Không có sản phẩm nào</tr>
+            }
+            else if (Model.Count != 0)
+            {
+
+                <table class="table table-bordered" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>Ảnh Sản phẩm</th>
+                            <th>Tên</th>
+                            <th style="padding-left: 3px; padding-right: 0px;">Số lượng</th>
+                            <th>Giá</th>
+                            <th>Thành tiền</th>
+                            <th>Xóa</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="demo">
+                        @{
+                            foreach (var i in Model)
+                            {
+                                String Gia = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", i.DonGia);
+                                String Tien = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", i.ThanhTien);
+                                <tr>
+                                    <td><img src="@i.Anh" style="width : 100px; height : 100px" /></td>
+                                    <td> @i.TenThietBi </td>
+                                    <td>
+                                        @using (Html.BeginForm("CapNhapSoLuong", "GioHang", new { @MaThietBi = i.MaThietBi }))
+                                        {
+                                            @Html.TextBox("Soluong", @i.SoLuong, new { type = "number", value = i.SoLuong, max = i.Max, min = 0 }) <button type="submit">Cập nhật</button>
+                                        }
+                                    </td>
+                                    <td> @Gia </td>
+                                    <td> @Tien</td>
+                                    <td> <a href="@Url.Action("Xoa", "GioHang", new { MaThietBi = @i.MaThietBi }))" class="btn btn-danger">Xóa</a> </td>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <tr>Không có sản phẩm nào</tr>
+            }
+        }
+
+        <div class="shop_bttom">
+            <div class="tongtien">Tổng tiền : <font>@String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", ViewBag.TongTien)</font></div>
+            <div class="clear"></div>
+            <div class="thanhtoan">
+                <div class="btntt-tt"><a href="@Url.Action("TrangChu","BanHang")" class="btn btn-primary">Tiếp tục chọn hàng ? </a></div>
+                <div class="tt_r">
+                    @{
+                        if (Model.Count != 0)
+                        {
+                            <a href="@Url.Action("ThanhToan","GioHang")" title="Thanh toán" class="btn btn-primary">Thanh toán</a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("ThanhToan","GioHang")" title="Thanh toán" class="btn btn-primary" disabled>Thanh toán</a>
+                        }
+                    }
+
+                </div>
+                <div class="clear"></div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+
+
