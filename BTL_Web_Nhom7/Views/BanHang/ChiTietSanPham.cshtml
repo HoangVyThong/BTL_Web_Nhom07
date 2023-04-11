@@ -19,8 +19,8 @@
     <section class="productscate">
         <div class="container">
             <div class="row">
-                @using (Html.BeginForm("ThemGioHang", "GioHang", new { @MaThietBi = Model.MaThietBi, @strUrl = ' '}))
-                {
+            @using (Html.BeginForm("ThemGioHang", "GioHang", new { @MaThietBi = Model.MaThietBi }))
+            {
                     Decimal? Giaban = Model.GiaBan;
                     if (Model.SoLuong == 0)
                     {
