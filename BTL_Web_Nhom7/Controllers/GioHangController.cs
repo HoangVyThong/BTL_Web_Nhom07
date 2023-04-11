@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BTL_Web_Nhom7.Controllers
 {
-    //public class GioHangController : Controller
+    public class GioHangController : Controller
     //{
     //    BtlWebContext db = new BtlWebContext();
 
