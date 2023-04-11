@@ -19,7 +19,7 @@
     <section class="productscate">
         <div class="container">
             <div class="row">
-                @using (Html.BeginForm("ThemGioHang", "GioHang", new { @MaThietBi = Model.MaThietBi, @strUrl = ' '}))
+                @using (Html.BeginForm("ThemGioHang", "GioHang", new { @MaThietBi = Model.MaThietBi}))
                 {
                     Decimal? Giaban = Model.GiaBan;
                     if (Model.SoLuong == 0)
@@ -73,7 +73,9 @@
                                 {
                                     <button id="featuredProduct_581" class="button btn-cart buy-now-detail add_to_cart" type="submit" title="Mua hàng">
                                         <span class="text-large">Mua hàng</span>
+
                                     </button>
+                                    //<a asp-controller="GioHang" asp-action="ThemGioHang" asp-route-MaThietBi="@Model.MaThietBi">Mua Hàng</a>
                                 }
                             }
 
@@ -113,9 +115,7 @@
                 <div class="note">
                     <p id="demo"></p>
                     <script>
-                    @*var html = "<p><strong>M&aacute;y đo huyết &aacute;p Sinoheart BA-801</strong><br />Thương hiệu Sinocare nổi tiếng với c&aacute;c d&ograve;ng m&aacute;y đo sức khỏe đang l&agrave;m mưa l&agrave;m gi&oacute; tr&ecirc;n thị trường với mẫu m&aacute;y đo đường huyết Sinocare Safe Accu gi&aacute; rẻ phổ th&ocirc;ng m&agrave; chất lượng v&agrave; độ ch&iacute;nh x&aacute;c cao.</p><p>&nbsp;</p><p><img src='https://salt.tikicdn.com/cache/w750/ts/product/04/9a/f6/9b4da29cc5142f6b0f79bcd9e3aa60ff.jpg' /></p><p><img alt=' src='https://salt.tikicdn.com/ts/tmp/d5/69/59/19998ebca6502516d0f2df1d7f3cd364.jpg' /></p><p>Kh&ocirc;ng dừng lại ở đ&oacute; Sinocare c&ograve;n c&oacute; rất nhiều mặt h&agrave;ng thiết bị sức khỏe kh&aacute;c được h&atilde;ng chăm ch&uacute;t kĩ lưỡng, thừa hưỡng d&acirc;y chuyền c&ocirc;ng nghệ cao đến từ Đức, Sinocare kh&ocirc;ng ngừng mở rộng quy m&ocirc; tr&ecirc;n to&agrave;n cầu về c&aacute;c mặt h&agrave;ng gi&aacute; phổ th&ocirc;ng bất cứ ai cũng c&oacute; thể mua được dễ d&agrave;ng.</p><p>&nbsp;</p><p><img src='https://salt.tikicdn.com/cache/w750/ts/product/f2/ca/04/6e54b5b3e10d1ce9dc9969fb0e6db7dd.jpg' /></p><p>- M&aacute;y đo huyết &aacute;p Sinoheart BA-801 l&agrave; d&ograve;ng sản phẩm b&aacute;n chạy tr&ecirc;n to&agrave;n cầu. Với &ocirc;ng nghệ ho&agrave;n to&agrave;n vượt trội v&agrave; đặc biệt l&agrave; c&ocirc;ng nghệ ho&agrave;n to&agrave;n mới so với tất cả c&aacute;c d&ograve;ng m&aacute;y đo huyết &aacute;p tr&ecirc;n thị trường.</p><p>&nbsp;</p><p><img src='https://salt.tikicdn.com/cache/w750/ts/product/89/4c/7f/bc63fdfa5551497348b7274a9781f74f.jpg' /></p><p>- T&iacute;nh năng:90 bộ lưu trữ (2 người), IHB rối loạn nhịp tim ph&aacute;t hiện, bảng ph&acirc;n loại huyết &aacute;p của WHO. Intelligense tạo &aacute;p suất</p><p>&nbsp;</p><p><img src='https://salt.tikicdn.com/cache/w750/ts/product/0e/40/fe/6dba6cf64f58f8b1ea55ca153198f9ca.jpg' /></p><p>&nbsp;</p><ul> <li>M&aacute;y Đo Huyết &Aacute;p Bắp Tay Sinocare Sinoheart BA-801&nbsp;l&agrave; d&ograve;ng sản phẩm b&aacute;n chạy tr&ecirc;n to&agrave;n cầu.</li> <li>Với c&ocirc;ng nghệ ho&agrave;n to&agrave;n vượt trội v&agrave; đặc biệt l&agrave; c&ocirc;ng nghệ ho&agrave;n to&agrave;n mới so với tất cả c&aacute;c d&ograve;ng m&aacute;y đo huyết &aacute;p tr&ecirc;n thị trường.</li> <li>T&iacute;nh năng: 90 bộ lưu trữ (2 người), IHB rối loạn nhịp tim ph&aacute;t hiện, bảng ph&acirc;n loại huyết &aacute;p của WHO. Intellisense tạo &aacute;p suất.</li> <li>BA-801 thể hiện đầy đủ 3 chỉ số: huyết &aacute;p tối đa, tối thiểu, nhịp tim.</li> <li>Thao t&aacute;c đo đơn giản, độ ch&iacute;nh x&aacute;c cao, m&agrave;n h&igrave;nh to, dễ nh&igrave;n th&iacute;ch hợp cho người cao tuổi.</li> <li>L&agrave; sản phẩm đo tr&ecirc;n bắp tay n&ecirc;n ph&ugrave; hợp với mọi đối tượng đo ngay cả người bị tiểu đường lẫn xơ vữa động mạch.</li></ul><p>Th&ocirc;ng số kỹ thuật:</p><ul> <li>Chế độ đo: Phạm vi đo: Phạm vi &aacute;p suất: 0-37.3kpa (0-280mmhg)</li> <li>Xung phạm vi: 40-199 lần/ph&uacute;t</li> <li>Phạm vi sai số: &Aacute;p suất tĩnh: &plusmn;0. 4kpa (&plusmn; 3 mmHg) Xung: trong v&ograve;ng &plusmn; 5%</li> <li>Độ d&agrave;i của v&ograve;ng b&iacute;t: 24-34 cm (9.4-13.4 inch)</li> <li>Nguồn điện cung cấp: DC6V (1.5 V 4 pin AAA, kh&ocirc;ng bao gồm pin)</li> <li>Tự động tắt nguồn: 60s</li> <li>K&iacute;ch Thước: 110 x 95 x 90 mm</li> <li>Lưu trữ nhiệt độ v&agrave; độ ẩm: Nhiệt độ:-20-65 &deg;C Độ ẩm: 10%-90% RH</li> <li>Sử dụng nhiệt độ độ ẩm: Nhiệt độ: 5-40 &deg;C Độ ẩm: 10%-90% RH</li></ul><p>Bộ sản phẩm bao gồm:</p><ul> <li>1 x M&aacute;y Huyết &aacute;p</li> <li>1 x V&ograve;ng B&iacute;t</li> <li>1 x Hướng dẫn sử dụng</li> <li>1 x 4 pin AA</li></ul> ";
-
-                    document.getElementById("demo").innerHTML = html;*@
+   
                     </script>
                     @Html.Raw(Model.ChiTiet)
                 </div>

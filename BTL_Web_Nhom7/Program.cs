@@ -1,5 +1,6 @@
 using BTL_Web_Nhom7.Models;
 using BTL_Web_Nhom7.Repository;
+using BTL_Web_Nhom7.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,12 +11,10 @@ var connectionString = builder.Configuration.GetConnectionString("BtlWebContext"
 builder.Services.AddDbContext<BtlWebContext>(option => option.UseSqlServer(connectionString));
 builder.Services.AddScoped<IDanhMucRepository, DanhMucRepository>();
 builder.Services.AddDistributedMemoryCache();
-
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromSeconds(10);
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
+    options.Cookie.Name = "thonghv";
+    options.IdleTimeout = new TimeSpan(0, 30, 0);
 });
 var app = builder.Build();
 

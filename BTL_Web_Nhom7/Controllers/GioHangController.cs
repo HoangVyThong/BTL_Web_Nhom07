@@ -4,37 +4,52 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using BTL_Web_Nhom7.Service;
 
 namespace BTL_Web_Nhom7.Controllers
 {
     public class GioHangController : Controller
     {
         BtlWebContext db = new BtlWebContext();
+		public const string CARTKEY = "GioHang";
 
-        
+		// Lấy cart từ Session (danh sách CartItem)
+		List<GioHang> GetCartItems()
+		{
 
-        public List<GioHang> LayGioHang()
+			var session = HttpContext.Session;
+			string jsoncart = session.GetString(CARTKEY);
+			if (jsoncart != null)
+			{
+				return JsonConvert.DeserializeObject<List<GioHang>>(jsoncart);
+			}
+			return new List<GioHang>();
+		}
+
+		// Xóa cart khỏi session
+		void ClearCart()
+		{
+			var session = HttpContext.Session;
+			session.Remove(CARTKEY);
+		}
+
+		// Lưu Cart (Danh sách CartItem) vào session
+		void SaveCartSession(List<GioHang> ls)
+		{
+			var session = HttpContext.Session;
+			string jsoncart = JsonConvert.SerializeObject(ls);
+			session.SetString(CARTKEY, jsoncart);
+		}
+		
+        public IActionResult ThemGioHang(string MaThietBi, IFormCollection f)
         {
             var session = HttpContext.Session;
-            var gioHangs = session.GetString("GioHang");
-            if (gioHangs == null)
-            {
-                List<GioHang> tmp = new List<GioHang>();
-                HttpContext.Session.SetString("GioHang", JsonConvert.SerializeObject(tmp));
-            }
-            gioHangs = session.GetString("GioHang");
-            return JsonConvert.DeserializeObject<List<GioHang>>(gioHangs);
-        }
-
-        public ActionResult ThemGioHang(string MaThietBi, string strUrl, FormCollection f)
-        {
             var sanpham = db.ThietBiYtes.Single(n => n.MaThietBi == MaThietBi);
             if (sanpham == null)
             {
-                Response.StatusCode = 404;
-                return null;
+                return BadRequest();
             }
-            List<GioHang> gioHangs = LayGioHang();
+            List<GioHang> gioHangs = GetCartItems();
             var gioHang = gioHangs.Find(n => n.MaThietBi == MaThietBi);
             if (gioHang == null)
             {
@@ -45,29 +60,38 @@ namespace BTL_Web_Nhom7.Controllers
                 gioHang.SoLuong = int.Parse(f["Soluong"].ToString());
                 if (gioHang.SoLuong > 0)
                     gioHangs.Add(gioHang);
-                return Redirect(strUrl);
+                //return Redirect("/GioHang/GioHang");
             }
             else
             {
                 int soluong = int.Parse(f["Soluong"].ToString());
                 if (sanpham.SoLuong + soluong < gioHang.SoLuong)
+                {
                     gioHang.SoLuong += soluong;
-                else
-                    gioHang.SoLuong = (int)sanpham.SoLuong;
-                return Redirect(strUrl);
-            }
+                    string jsoncart = JsonConvert.SerializeObject(gioHangs);
+                    session.SetString("GioHang", jsoncart);
+                }
 
-        }
-        public ActionResult CapNhapSoLuong(string MaThietBi, FormCollection f)
+                else
+                {
+                    gioHang.SoLuong = (int)sanpham.SoLuong;
+                    string jsoncart = JsonConvert.SerializeObject(gioHangs);
+                    session.SetString("GioHang", jsoncart);
+                }
+                    
+            }
+			SaveCartSession(gioHangs);
+			return Redirect("/Giohang/GioHang");
+
+		}
+        public IActionResult CapNhapSoLuong(string MaThietBi, IFormCollection f)
         {
             var sanpham = db.ThietBiYtes.Single(n => n.MaThietBi == MaThietBi);
             if (sanpham == null)
             {
-                
-                Response.StatusCode = 404;
-                return null;
+                BadRequest();
             }
-            List<GioHang> listGioHang = LayGioHang();
+            List<GioHang> listGioHang = GetCartItems();
             GioHang sp = listGioHang.Single(n => n.MaThietBi == MaThietBi);
             if (sp != null)
             {
@@ -76,7 +100,8 @@ namespace BTL_Web_Nhom7.Controllers
                 {
                     Xoa(MaThietBi);
                 }
-            }
+				SaveCartSession(listGioHang);
+			}
             return RedirectToAction("GioHang");
         }
         public ActionResult Xoa(string MaThietBi)
@@ -89,37 +114,36 @@ namespace BTL_Web_Nhom7.Controllers
                 Response.StatusCode = 404;
                 return null;
             }
-            List<GioHang> lstGioHang = LayGioHang();
+            List<GioHang> lstGioHang = GetCartItems();
             GioHang sp = lstGioHang.Single(n => n.MaThietBi == MaThietBi);
             if (sp != null)
-            { lstGioHang.RemoveAll(n => n.MaThietBi == MaThietBi); }
+            { lstGioHang.RemoveAll(n => n.MaThietBi == MaThietBi);
+				SaveCartSession(lstGioHang);
+			}
             if (lstGioHang.Count == 0)
-            { RedirectToAction("TrangChu", "BanHang"); }
+            {   
+                RedirectToAction("TrangChu", "BanHang"); }
             return RedirectToAction("GioHang");
         }
 
         public IActionResult GioHang()
         {
-            if (HttpContext.Session.GetString("GioHang") == null)
-            {
-                return RedirectToAction("TrangChu", "BanHang");
-            }
             var gioHangs = HttpContext.Session.GetString("GioHang");
             ViewBag.TongTien = TongTien();
             ViewBag.SoLuong = TongSoLuong();
-            return View(JsonConvert.DeserializeObject<List<GioHang>>(gioHangs));
+            return View(GetCartItems());
         }
         public int TongSoLuong()
         {
             int t = 0;
-            List<GioHang> listGioHang = LayGioHang();
+            List<GioHang> listGioHang = GetCartItems();
             t = listGioHang.Count;
             return t;
         }
         public double TongTien()
         {
             double t = 0;
-            List<GioHang> listGioHang = LayGioHang();
+            List<GioHang> listGioHang = GetCartItems();
             t = (double)listGioHang.Sum(n => n.ThanhTien);
             return t;
         }
@@ -159,7 +183,7 @@ namespace BTL_Web_Nhom7.Controllers
             {
                 return RedirectToAction("TrangChu", "BanHang");
             }
-            List<GioHang> lstGioHang = LayGioHang();
+            List<GioHang> lstGioHang = GetCartItems();
             foreach (var item in lstGioHang)
             {
                 var t = db.ThietBiYtes.SingleOrDefault(n => n.MaThietBi == item.MaThietBi);
