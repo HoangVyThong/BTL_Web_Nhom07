@@ -4,6 +4,7 @@
 }
 
 @model List<DanhMuc>
+
 <section class="homeproducts">
 	<div class="container" id="ele-for-render-ajax">
 		<!-- Danh mục 1 -->
@@ -13,6 +14,24 @@
 			<div class="row">
 				@foreach (var i1 in ViewBag.sanPham1)
 				{
+					if (i1.An == true)
+					{
+						continue;
+					}
+					Decimal? Giaban = i1.GiaBan;
+					if (i1.SoLuong == 0)
+					{
+						Giaban = -1;
+					}
+					String Gia = Giaban > 0 ? String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", i1.GiaBan) : "Liên hệ!";
+					String ChietKhau = i1.GiamGia > 0 ? i1.GiamGia.ToString() + "%" : "";
+					if (i1.GiamGia > 0 && Giaban > 0)
+					{
+						double t = (double)i1.GiamGia;
+						double tien = (double)i1.GiaBan * (1 - t);
+						Gia = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", tien);
+						ChietKhau = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", i1.GiaBan);
+					}
 					<div class="col-md-3 productsbox">
 						<div class="btn05">
 							<div class="productsbox-img">
@@ -25,7 +44,7 @@
 							</div>
 						</div>
 						<h3 class="productsbox-name"><a asp-controller="BanHang" asp-action="ChiTietSanPham" asp-route-MaSP="@i1.MaThietBi" title="Máy đo đường huyết Accu Chek Instant">@i1.TenThietBi</a></h3>
-						<div class="productsbox-price"><div class="price-goc">949,000 VNĐ</div> <div class="price-dis">1,300,000 VNĐ</div></div>
+						<div class="productsbox-price"><div class="price-goc">@Gia </div> <div class="price-dis">@ChietKhau</div></div>
 					</div>
 				}
 
@@ -38,6 +57,24 @@
 			<div class="row">
 				@foreach (var i2 in ViewBag.sanPham2)
 				{
+					if (i2.An == true)
+					{
+						continue;
+					}
+					Decimal? Giaban = i2.GiaBan;
+					if (i2.SoLuong == 0)
+					{
+						Giaban = -1;
+					}
+					String Gia = Giaban > 0 ? String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", i2.GiaBan) : "Liên hệ!";
+					String ChietKhau = i2.GiamGia > 0 ? i2.GiamGia.ToString() + "%" : "";
+					if (i2.GiamGia > 0 && Giaban > 0)
+					{
+						double t = (double)i2.GiamGia;
+						double tien = (double)i2.GiaBan * (1 - t);
+						Gia = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", tien);
+						ChietKhau = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", i2.GiaBan);
+					}
 					<div class="col-md-3 productsbox">
 						<div class="btn05">
 							<div class="productsbox-img"><a href="./may-do-duong-huyet-accu-chek-instant.html" title="Máy đo đường huyết Accu Chek Instant"><img src="@i2.Anh" title="Máy đo đường huyết Accu Chek Instant" alt="Máy đo đường huyết Accu Chek Instant" data-alt-src="products/accu chek instant.jpg"></a></div>
@@ -48,7 +85,7 @@
 							</div>
 						</div>
 						<h3 class="productsbox-name"><a asp-controller="BanHang" asp-action="ChiTietSanPham" asp-route-MaSP="@i2.MaThietBi" title="Máy đo đường huyết Accu Chek Instant">@i2.TenThietBi</a></h3>
-						<div class="productsbox-price"><div class="price-goc">949,000 VNĐ</div> <div class="price-dis">1,300,000 VNĐ</div></div>
+						<div class="productsbox-price"><div class="price-goc">@Gia </div> <div class="price-dis">@ChietKhau</div></div>
 					</div>
 				}
 
@@ -61,6 +98,24 @@
 			<div class="row">
 				@foreach (var i3 in ViewBag.sanPham3)
 				{
+					if (i3.An == true)
+					{
+						continue;
+					}
+					Decimal? Giaban = i3.GiaBan;
+					if (i3.SoLuong == 0)
+					{
+						Giaban = -1;
+					}
+					String Gia = Giaban > 0 ? String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", i3.GiaBan) : "Liên hệ!";
+					String ChietKhau = i3.GiamGia > 0 ? i3.GiamGia.ToString() + "%" : "";
+					if (i3.GiamGia > 0 && Giaban > 0)
+					{
+						double t = (double)i3.GiamGia;
+						double tien = (double)i3.GiaBan * (1 - t);
+						Gia = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", tien);
+						ChietKhau = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", i3.GiaBan);
+					}
 						<div class="col-md-3 productsbox">
 							<div class="btn05">
 								<div class="productsbox-img"><a href="./may-do-duong-huyet-accu-chek-instant.html" title="Máy đo đường huyết Accu Chek Instant"><img src="@i3.Anh" title="Máy đo đường huyết Accu Chek Instant" alt="Máy đo đường huyết Accu Chek Instant" data-alt-src="products/accu chek instant.jpg"></a></div>
@@ -71,7 +126,7 @@
 								</div>
 							</div>
 						<h3 class="productsbox-name"><a asp-controller="BanHang" asp-action="ChiTietSanPham" asp-route-MaSP="@i3.MaThietBi" title="Máy đo đường huyết Accu Chek Instant">@i3.TenThietBi</a></h3>
-							<div class="productsbox-price"><div class="price-goc">949,000 VNĐ</div> <div class="price-dis">1,300,000 VNĐ</div></div>
+						<div class="productsbox-price"><div class="price-goc">@Gia </div> <div class="price-dis">@ChietKhau</div></div>
 						</div>
 				}
 
@@ -84,6 +139,24 @@
 			<div class="row">
 				@foreach (var i4 in ViewBag.sanPham4)
 				{
+					if (i4.An == true)
+					{
+						continue;
+					}
+					Decimal? Giaban = i4.GiaBan;
+					if (i4.SoLuong == 0)
+					{
+						Giaban = -1;
+					}
+					String Gia = Giaban > 0 ? String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", i4.GiaBan) : "Liên hệ!";
+					String ChietKhau = i4.GiamGia > 0 ? i4.GiamGia.ToString() + "%" : "";
+					if (i4.GiamGia > 0 && Giaban > 0)
+					{
+						double t = (double)i4.GiamGia;
+						double tien = (double)i4.GiaBan * (1 - t);
+						Gia = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", tien);
+						ChietKhau = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", i4.GiaBan);
+					}
 						<div class="col-md-3 productsbox">
 							<div class="btn05">
 								<div class="productsbox-img"><a href="./may-do-duong-huyet-accu-chek-instant.html" title="Máy đo đường huyết Accu Chek Instant"><img src="@i4.Anh" title="Máy đo đường huyết Accu Chek Instant" alt="Máy đo đường huyết Accu Chek Instant" data-alt-src="products/accu chek instant.jpg"></a></div>
@@ -94,7 +167,7 @@
 								</div>
 							</div>
 						<h3 class="productsbox-name"><a asp-controller="BanHang" asp-action="ChiTietSanPham" asp-route-MaSP="@i4.MaThietBi" title="Máy đo đường huyết Accu Chek Instant">@i4.TenThietBi</a></h3>
-							<div class="productsbox-price"><div class="price-goc">949,000 VNĐ</div> <div class="price-dis">1,300,000 VNĐ</div></div>
+							<div class="productsbox-price"><div class="price-goc">@Gia </div> <div class="price-dis">@ChietKhau</div></div>
 						</div>
 				}
 
@@ -107,6 +180,24 @@
 			<div class="row">
 				@foreach (var i5 in ViewBag.sanPham5)
 				{
+					if (i5.An == true)
+					{
+						continue;
+					}
+					Decimal? Giaban = i5.GiaBan;
+					if (i5.SoLuong == 0)
+					{
+						Giaban = -1;
+					}
+					String Gia = Giaban > 0 ? String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", i5.GiaBan) : "Liên hệ!";
+					String ChietKhau = i5.GiamGia > 0 ? i5.GiamGia.ToString() + "%" : "";
+					if (i5.GiamGia > 0 && Giaban > 0)
+					{
+						double t = (double)i5.GiamGia;
+						double tien = (double)i5.GiaBan * (1 - t);
+						Gia = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", tien);
+						ChietKhau = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", i5.GiaBan);
+					}
 					<div class="col-md-3 productsbox">
 						<div class="btn05">
 							<div class="productsbox-img"><a href="./may-do-duong-huyet-accu-chek-instant.html" title="Máy đo đường huyết Accu Chek Instant"><img src="@i5.Anh" title="Máy đo đường huyết Accu Chek Instant" alt="Máy đo đường huyết Accu Chek Instant" data-alt-src="products/accu chek instant.jpg"></a></div>
@@ -117,7 +208,8 @@
 							</div>
 						</div>
 						<h3 class="productsbox-name"><a asp-controller="BanHang" asp-action="ChiTietSanPham" asp-route-MaSP="@i5.MaThietBi" title="Máy đo đường huyết Accu Chek Instant">@i5.TenThietBi</a></h3>
-						<div class="productsbox-price"><div class="price-goc">949,000 VNĐ</div> <div class="price-dis">1,300,000 VNĐ</div></div>
+						<div class="productsbox-price"><div class="price-goc">@Gia </div> <div class="price-dis">@ChietKhau</div>
+					</div>
 					</div>
 				}
 
@@ -130,6 +222,24 @@
 			<div class="row">
 				@foreach (var i6 in ViewBag.sanPham6)
 				{
+					if (i6.An == true)
+					{
+						continue;
+					}
+					Decimal? Giaban = i6.GiaBan;
+					if (i6.SoLuong == 0)
+					{
+						Giaban = -1;
+					}
+					String Gia = Giaban > 0 ? String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", i6.GiaBan) : "Liên hệ!";
+					String ChietKhau = i6.GiamGia > 0 ? i6.GiamGia.ToString() + "%" : "";
+					if (i6.GiamGia > 0 && Giaban > 0)
+					{
+						double t = (double)i6.GiamGia;
+						double tien = (double)i6.GiaBan * (1 - t);
+						Gia = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", tien);
+						ChietKhau = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", i6.GiaBan);
+					}
 						<div class="col-md-3 productsbox">
 							<div class="btn05">
 								<div class="productsbox-img"><a href="./may-do-duong-huyet-accu-chek-instant.html" title="Máy đo đường huyết Accu Chek Instant"><img src="@i6.Anh" title="Máy đo đường huyết Accu Chek Instant" alt="Máy đo đường huyết Accu Chek Instant" data-alt-src="products/accu chek instant.jpg"></a></div>
@@ -140,7 +250,7 @@
 								</div>
 							</div>
 						<h3 class="productsbox-name"><a asp-controller="BanHang" asp-action="ChiTietSanPham" asp-route-MaSP="@i6.MaThietBi" title="Máy đo đường huyết Accu Chek Instant">@i6.TenThietBi</a></h3>
-							<div class="productsbox-price"><div class="price-goc">949,000 VNĐ</div> <div class="price-dis">1,300,000 VNĐ</div></div>
+						<div class="productsbox-price"><div class="price-goc">@Gia </div> <div class="price-dis">@ChietKhau</div></div>
 						</div>
 				}
 
@@ -153,6 +263,24 @@
 			<div class="row">
 				@foreach (var i7 in ViewBag.sanPham7)
 				{
+					if (i7.An == true)
+					{
+						continue;
+					}
+					Decimal? Giaban = i7.GiaBan;
+					if (i7.SoLuong == 0)
+					{
+						Giaban = -1;
+					}
+					String Gia = Giaban > 0 ? String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", i7.GiaBan) : "Liên hệ!";
+					String ChietKhau = i7.GiamGia > 0 ? i7.GiamGia.ToString() + "%" : "";
+					if (i7.GiamGia > 0 && Giaban > 0)
+					{
+						double t = (double)i7.GiamGia;
+						double tien = (double)i7.GiaBan * (1 - t);
+						Gia = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", tien);
+						ChietKhau = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", i7.GiaBan);
+					}
 					<div class="col-md-3 productsbox">
 						<div class="btn05">
 							<div class="productsbox-img"><a href="./may-do-duong-huyet-accu-chek-instant.html" title="Máy đo đường huyết Accu Chek Instant"><img src="@i7.Anh" title="Máy đo đường huyết Accu Chek Instant" alt="Máy đo đường huyết Accu Chek Instant" data-alt-src="products/accu chek instant.jpg"></a></div>
@@ -163,7 +291,7 @@
 							</div>
 						</div>
 						<h3 class="productsbox-name"><a asp-controller="BanHang" asp-action="ChiTietSanPham" asp-route-MaSP="@i7.MaThietBi" title="Máy đo đường huyết Accu Chek Instant">@i7.TenThietBi</a></h3>
-						<div class="productsbox-price"><div class="price-goc">949,000 VNĐ</div> <div class="price-dis">1,300,000 VNĐ</div></div>
+						<div class="productsbox-price"><div class="price-goc">@Gia </div> <div class="price-dis">@ChietKhau</div></div>
 					</div>
 				}
 

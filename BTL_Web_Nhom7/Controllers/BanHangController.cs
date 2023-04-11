@@ -18,7 +18,11 @@ namespace BTL_Web_Nhom7.Controllers
                           {
                               MaThietBi = p.MaThietBi,
                               TenThietBi = p.TenThietBi,
-                              Anh = p.Anh
+                              Anh = p.Anh,
+                              An = p.An,
+                              GiaBan = p.GiaBan,
+                              GiamGia = p.GiamGia,
+                              SoLuong = p.SoLuong
                           }).Take(4).ToList();
 			var sanPham2 = (from p in db.ThietBiYtes
 							join q in db.LoaiThietBis on p.MaLoai equals q.MaLoai
@@ -27,8 +31,12 @@ namespace BTL_Web_Nhom7.Controllers
 							{
 								MaThietBi = p.MaThietBi,
 								TenThietBi = p.TenThietBi,
-								Anh = p.Anh
-							}).Take(4).ToList();
+								Anh = p.Anh,
+                                An = p.An,
+                                GiaBan = p.GiaBan,
+                                GiamGia = p.GiamGia,
+                                SoLuong = p.SoLuong
+                            }).Take(4).ToList();
 			var sanPham3 = (from p in db.ThietBiYtes
 							join q in db.LoaiThietBis on p.MaLoai equals q.MaLoai
 							where q.MaDanhMuc == "DM3"
@@ -36,8 +44,12 @@ namespace BTL_Web_Nhom7.Controllers
 							{
 								MaThietBi = p.MaThietBi,
 								TenThietBi = p.TenThietBi,
-								Anh = p.Anh
-							}).Take(4).ToList();
+								Anh = p.Anh,
+                                An = p.An,
+                                GiaBan = p.GiaBan,
+                                GiamGia = p.GiamGia,
+                                SoLuong = p.SoLuong
+                            }).Take(4).ToList();
 			var sanPham4 = (from p in db.ThietBiYtes
 							join q in db.LoaiThietBis on p.MaLoai equals q.MaLoai
 							where q.MaDanhMuc == "DM4"
@@ -45,8 +57,12 @@ namespace BTL_Web_Nhom7.Controllers
 							{
 								MaThietBi = p.MaThietBi,
 								TenThietBi = p.TenThietBi,
-								Anh = p.Anh
-							}).Take(4).ToList();
+								Anh = p.Anh,
+                                An = p.An,
+                                GiaBan = p.GiaBan,
+                                GiamGia = p.GiamGia,
+                                SoLuong = p.SoLuong
+                            }).Take(4).ToList();
 			var sanPham5 = (from p in db.ThietBiYtes
 							join q in db.LoaiThietBis on p.MaLoai equals q.MaLoai
 							where q.MaDanhMuc == "DM5"
@@ -54,8 +70,12 @@ namespace BTL_Web_Nhom7.Controllers
 							{
 								MaThietBi = p.MaThietBi,
 								TenThietBi = p.TenThietBi,
-								Anh = p.Anh
-							}).Take(4).ToList();
+								Anh = p.Anh,
+                                An = p.An,
+                                GiaBan = p.GiaBan,
+                                GiamGia = p.GiamGia,
+                                SoLuong = p.SoLuong
+                            }).Take(4).ToList();
 			var sanPham6 = (from p in db.ThietBiYtes
 							join q in db.LoaiThietBis on p.MaLoai equals q.MaLoai
 							where q.MaDanhMuc == "DM6"
@@ -63,8 +83,12 @@ namespace BTL_Web_Nhom7.Controllers
 							{
 								MaThietBi = p.MaThietBi,
 								TenThietBi = p.TenThietBi,
-								Anh = p.Anh
-							}).Take(4).ToList();
+								Anh = p.Anh,
+                                An = p.An,
+                                GiaBan = p.GiaBan,
+                                GiamGia = p.GiamGia,
+                                SoLuong = p.SoLuong
+                            }).Take(4).ToList();
 			var sanPham7 = (from p in db.ThietBiYtes
 							join q in db.LoaiThietBis on p.MaLoai equals q.MaLoai
 							where q.MaDanhMuc == "DM7"
@@ -72,8 +96,12 @@ namespace BTL_Web_Nhom7.Controllers
 							{
 								MaThietBi = p.MaThietBi,
 								TenThietBi = p.TenThietBi,
-								Anh = p.Anh
-							}).Take(4).ToList();
+								Anh = p.Anh,
+                                An = p.An,
+                                GiaBan = p.GiaBan,
+                                GiamGia = p.GiamGia,
+                                SoLuong = p.SoLuong
+                            }).Take(4).ToList();
 			ViewBag.sanPham1 = sanPham1;
 			ViewBag.sanPham2 = sanPham2;
 			ViewBag.sanPham3 = sanPham3;
