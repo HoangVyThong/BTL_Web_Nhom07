@@ -167,7 +167,6 @@ namespace BTL_Web_Nhom7.Controllers
         {
             if (HttpContext.Session.GetString("GioHang") == null)
             {
-                
                 return RedirectToAction("TrangChu", "BanHang");
             }
             var gioHangs = HttpContext.Session.GetString("GioHang");
