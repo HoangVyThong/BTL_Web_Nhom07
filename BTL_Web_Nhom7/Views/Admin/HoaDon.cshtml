@@ -1,0 +1,35 @@
+﻿@using BTL_Web_Nhom7.Models;
+@using BTL_Web_Nhom7.Models.HoaDonModel;
+@using X.PagedList.Mvc.Core;
+@model X.PagedList.PagedList<HoaDonDTO>
+@{
+    ViewBag.Title = "HoaDon";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<table class="table table-hover" style="text-align:center">
+    <thead>
+        <tr>
+            <th style="max-width:150px">Số Hóa Đơn</th>
+            <th>Tên Khách Hàng</th>
+            <th>Số điện thoại</th>
+            <th>Địa chỉ</th>
+            <th>Ngày Mua</th>
+            <th>Thành tiền</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            @await Html.PartialAsync("PartialHoaDon", i)
+        }
+    </tbody>
+</table>
+
+
+<nav style="float:right">
+    <ul class="">
+        @Html.PagedListPager(Model, page => Url.Action("HoaDon", new { page = page }))
+    </ul>
+</nav>
+<hr>
+<div id="ChiTietHoaDon"></div>

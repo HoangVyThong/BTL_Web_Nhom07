@@ -1,0 +1,85 @@
+﻿@model BTL_Web_Nhom7.Models.ThietBiYte
+
+@{
+    ViewData["Title"] = "ThemSanPham";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ThemSanPham">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MaThietBi" class="control-label"></label>
+                <input readonly="readonly" value="@ViewBag.MaThietBi" asp-for="MaThietBi" class="form-control" />
+                <span asp-validation-for="MaThietBi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaLoai" class="control-label"></label>
+                <select asp-for="MaLoai" class ="form-control" asp-items="ViewBag.MaLoai"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaHang" class="control-label"></label>
+                <select asp-for="MaHang" class ="form-control" asp-items="ViewBag.MaHang"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenThietBi" class="control-label"></label>
+                <input asp-for="TenThietBi" class="form-control" />
+                <span asp-validation-for="TenThietBi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GioiThieu" class="control-label"></label>
+                <input asp-for="GioiThieu" class="form-control" />
+                <span asp-validation-for="GioiThieu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GiaBan" class="control-label"></label>
+                <input asp-for="GiaBan" class="form-control" />
+                <span asp-validation-for="GiaBan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Anh" class="control-label"></label>
+                <input asp-for="Anh" class="form-control" />
+                <span asp-validation-for="Anh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ChiTiet" class="control-label"></label>
+                <input asp-for="ChiTiet" class="form-control" />
+                <span asp-validation-for="ChiTiet" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="An" class="control-label"></label>
+                <input asp-for="An" class="form-control" />
+                <span asp-validation-for="An" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GiamGia" class="control-label"></label>
+                <input asp-for="GiamGia" class="form-control" />
+                <span asp-validation-for="GiamGia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoLuong" class="control-label"></label>
+                <input asp-for="SoLuong" class="form-control" />
+                <span asp-validation-for="SoLuong" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TongSoSao" class="control-label"></label>
+                <input asp-for="TongSoSao" class="form-control" />
+                <span asp-validation-for="TongSoSao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TongSoDanhGia" class="control-label"></label>
+                <input asp-for="TongSoDanhGia" class="form-control" />
+                <span asp-validation-for="TongSoDanhGia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="TrangChu">Back to List</a>
+</div>
+
