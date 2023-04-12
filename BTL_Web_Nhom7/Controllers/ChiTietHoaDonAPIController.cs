@@ -1,4 +1,5 @@
 ﻿using BTL_Web_Nhom7.Models;
+using BTL_Web_Nhom7.Models.Authentication;
 using BTL_Web_Nhom7.Models.HoaDonModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ namespace BTL_Web_Nhom7.Controllers
     public class ChiTietHoaDonAPIController : ControllerBase
     {
         BtlWebContext db = new BtlWebContext();
+        [Authentication]
         [Route("{SoHD}")]
         public IEnumerable<ChiTietHoaDonDTO> GetChiTietHoaDon(string SoHD)
         {
@@ -21,7 +23,7 @@ namespace BTL_Web_Nhom7.Controllers
                          SoHdb = p.SoHdb,
                          TenThietBi = q.TenThietBi,
                          Anh = q.Anh,
-                         SoLuong = q.SoLuong,
+                         SoLuong = p.SoLuong,
                          GiaBan = q.GiaBan,
                          ThanhTien = p.ThanhTien
                      }).ToList();

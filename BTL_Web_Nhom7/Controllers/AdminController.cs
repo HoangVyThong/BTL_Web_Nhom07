@@ -3,6 +3,7 @@ using BTL_Web_Nhom7.Models.Authentication;
 using BTL_Web_Nhom7.Models.HoaDonModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
@@ -78,47 +79,39 @@ namespace BTL_Web_Nhom7.Controllers
             }
             return View();
         }
-        [Authentication]
+        //[Authentication]
         public IActionResult HoaDon(int? page)
         {
-            var listHoaDons = from p in db.HoaDonBans
-                              join q in db.ChiTietHdbs on p.SoHdb equals q.SoHdb
-                              join e in db.KhachHangs on p.MaKh equals e.MaKh
-                              select new HoaDonDTO
-                              {
-                                  SoHdb = p.SoHdb,
-                                  TenKh = e.TenKh,
-                                  DienThoai = e.DienThoai,
-                                  DiaChi = e.DiaChi,
-                                  NgayLap = p.NgayLap,
-                                  ThanhTien = q.ThanhTien
-                              };
-            listHoaDons.ToList();
+            //sql: select ChiTietHDB.SoHDB,TenKH, DienThoai, DiaChi,NgayLap,SUM(ThanhTien) as ThanhTien from ChiTietHDB join HoaDonBan on ChiTietHDB.SoHDB = HoaDonBan.SoHDB join KhachHang on KhachHang.MaKH = HoaDonBan.MaKH
+            //group by ChiTietHDB.SoHDB,TenKH,DienThoai, DiaChi, NgayLap
+            var result = (from c in db.ChiTietHdbs
+                         join h in db.HoaDonBans on c.SoHdb equals h.SoHdb
+                         join kh in db.KhachHangs on h.MaKh equals kh.MaKh
+                         group new { c, h, kh } by new
+                         {
+                             c.SoHdb,
+                             kh.TenKh,
+                             kh.DienThoai,
+                             kh.DiaChi,
+                             h.NgayLap
+                         } into g
+                         select new HoaDonDTO
+                         {
+                             SoHdb = g.Key.SoHdb,
+                             TenKh=g.Key.TenKh,
+                             DienThoai = g.Key.DienThoai,
+                             DiaChi = g.Key.DiaChi,
+                             NgayLap = g.Key.NgayLap,
+                             ThanhTien = g.Sum(x => x.c.ThanhTien)
+                         }).ToList();
             int pagesize = 20;
             int pagenumber = (page ?? 1) > pagesize ? (page ?? 1) : 1;
-            if (listHoaDons.Count() == 0)
+            if (result.Count == 0)
             {
                 ViewBag.ThongBao = "Không tìm thấy hóa đơn";
-                return View(listHoaDons.OrderByDescending(n => n.NgayLap).ToPagedList(pagenumber, pagesize));
+                return View(db.HoaDonBans.OrderBy(n => n.SoHdb).ToPagedList(pagenumber, pagesize));
             }
-            return View(listHoaDons.OrderByDescending(n => n.NgayLap).ToPagedList(pagenumber, pagesize));
-        }
-        [Authentication]
-        public IActionResult ChiTietHoaDon(string SoHD)
-        {
-            var s = from p in db.ChiTietHdbs 
-                    join q in db.ThietBiYtes on p.MaThietBi equals q.MaThietBi
-                    where p.SoHdb == SoHD
-                    select new
-                    {
-                        SoHDB = p.SoHdb,
-                        TenThietBi = q.TenThietBi,
-                        AnhThietBi = q.Anh,
-                        SoLuong = q.SoLuong,
-                        GiaBan = q.GiaBan,
-                        ThanhTien = p.ThanhTien
-                    };
-            return View(s);
+            return View(result.OrderByDescending(n => n.NgayLap).ToPagedList(pagenumber, pagesize));
         }
         [Authentication]
         [HttpPost]
@@ -184,7 +177,6 @@ namespace BTL_Web_Nhom7.Controllers
                            };
             thietBis.OrderBy(x => x.TenThietBi).ToList();
             return View(thietBis);
-            //return Json(Thietbis, JsonRequestBehavior.AllowGet);
         }
         [Authentication]
         public PartialViewResult PartialOpsitionLoai()

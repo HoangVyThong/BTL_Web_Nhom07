@@ -8,5 +8,16 @@
         public string? DiaChi { get; set; }
         public DateTime? NgayLap { get; set; }
         public decimal? ThanhTien { get; set; }
+
+        public HoaDonDTO() { }
+        public HoaDonDTO(string soHdb, string? tenKh, string? dienThoai, string? diaChi, DateTime? ngayLap, decimal? thanhTien)
+        {
+            SoHdb = soHdb;
+            TenKh = tenKh;
+            DienThoai = dienThoai;
+            DiaChi = diaChi;
+            NgayLap = ngayLap;
+            ThanhTien = thanhTien;
+        }
     }
 }
