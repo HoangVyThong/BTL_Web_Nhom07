@@ -19,14 +19,12 @@
     <td style="color:red" >@Model.ThanhTien</td>
 </tr>
 
-<script type="text/javascript">
+@*<script type="text/javascript">
             function DisplayHoaDon(id) {
-                alert("OK");
-                alert('https://localhost:7120/Admin/ChiTietHoaDon?SoHD=' + id);
                 var str = '<table class="table table-striped">< thead ><tr><th>Số Hóa Đơn</th><th>Tên Khách Hàng</th><th>Ngày Mua</th><th>Thành tiền</th></tr></thead ><tbody>';
                 $.ajax({
                     type: 'GET',
-                    url: 'https://localhost:7120/Admin/ChiTietHoaDon?SoHD=' + id,
+                    url: 'https://localhost:7120/api/ChiTietHoaDonAPI/' + id,
                     dataType: 'JSON',
                     success: function (data) {
                         $.each(data, function (key, val) {
@@ -41,4 +39,4 @@
                     }
                 });
             }
-        </script>
+ </script>*@

@@ -70,20 +70,24 @@
         <script src="~/Content/Data/jquery.min.js"></script>
         <script src="~/Content/Data/main.js"></script>
         <script src="~/Content/Data/popper.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
         <script type="text/javascript">
             function DisplayHoaDon(id) {
                 var str = '<h3 style="text-align: center;margin-top: 5rem;">Chi Tiết Hóa Đơn</h3><table class="table table-striped" id = "ChiTietHoaDon" style="text-align:center"><thead ><tr><th>Số Hóa Đơn</th><th>Tên Thiết bị</th><th style="max-width:150px">Ảnh</th><th>Số lượng</th><th>Giá Bán</th><th>Thành tiền</th></tr></thead ><tbody>';
                 $.ajax({
                     type: 'GET',
-                    url: 'https://localhost:7210/Admin/ChiTietHoaDon?SoHD=' + id,
+                    url: 'https://localhost:7120/api/ChiTietHoaDonAPI/' + id,
                     dataType: 'JSON',
                     success: function (data) {
                         $.each(data, function (key, val) {
-                            var num = val.GiaBan;
-                            var num2 = val.ThanhTien;
-                            var gia = num.toLocaleString() + " VNĐ";
-                            var gia2 = num2.toLocaleString() + " VNĐ";
-                            str += '<tr><td>' + val.SoHDB + '</td><td>' + val.TenThietBi + '</td><td><img src="' + val.AnhThietBi + '" style="max-width:150px" ></td><td>' + val.SoLuong + '</td><td>' + gia + '</td><td>' + gia2 + '</td></tr>';
+                            var num = val.giaBan;
+                            var num2 = val.thanhTien;
+                            var gia = num + " VNĐ";
+                            var gia2 = num2 + " VNĐ";
+                            str += '<tr><td>' + val.soHdb + '</td><td>' + val.tenThietBi + '</td><td><img src="' + val.anh + '" style="max-width:150px" ></td><td>' + val.soLuong + '</td><td>' + gia + '</td><td>' + gia2 + '</td></tr>';
                         });
                         str += '</tbody></table >';
                         $('#ChiTietHoaDon').html(str);
