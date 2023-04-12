@@ -16,6 +16,34 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\Code\Web\BTL_Web_Nhom7\BTL_Web_Nhom7
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/Admin/DangNhap.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGFuZ05oYXAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/Admin/DanhSach.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGFuaFNhY2guY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/Admin/HoaDon.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSG9hRG9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/Admin/PartialHoaDon.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGFydGlhbEhvYURvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/Admin/SuaSanPham.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU3VhU2FuUGhhbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/Admin/ThemSanPham.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVGhlbVNhblBoYW0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/Admin/TrangChu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVHJhbmdDaHUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/BanHang/ChiTietSanPham.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFuSGFuZ1xDaGlUaWV0U2FuUGhhbS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -64,6 +92,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lvSGFuZ1xHaW9IYW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/GioHang/ThanhToan.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lvSGFuZ1xUaGFuaFRvYW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -78,6 +110,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/Shared/_LayoutAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRBZG1pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Code/Web/BTL_Web_Nhom7/BTL_Web_Nhom7/Views/Shared/_LayoutBanHang.cshtml]

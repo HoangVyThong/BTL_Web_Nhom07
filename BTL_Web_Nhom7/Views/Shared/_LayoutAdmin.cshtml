@@ -1,0 +1,98 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <title>Admin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfKXA6HCKoxduVb5Wwxs48PL9HH8w9EvbfnA&usqp=CAU" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="../Content/Data/abc.css" rel="stylesheet" />
+    <link href="../Content/Data/Pagelist.css" rel="stylesheet" />
+    <link href="../Content/Data/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <script src="//cdn.ckeditor.com/4.17.2/full/ckeditor.js"></script>
+    <script>
+        function demo() {
+            var desc = CKEDITOR.instances['DSC'].getData();
+            document.getElementById("demo").innerHTML = desc;
+        }
+    </script>
+    <style>
+        a {
+            text-decoration: auto;
+        }
+    </style>
+</head>
+<body>
+    <div style="color: black;"></div>
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+            <div class="custom-menu">
+            </div>
+            <h1 style="margin-top: 0;margin-bottom: 0;"><a href="@Url.Action("TrangChu","Admin")" class="logo" style="height: 100px; padding: 35px 30px;">Chào Thông! </a></h1>
+            <ul class="list-unstyled components mb-5">
+                <li class="active">
+                    <a href="@Url.Action("TrangChu","Admin")"><span class="fa fa-home mr-3"></span> Trang chủ </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Danhsach","Admin")"><span class="fa fa-sticky-note mr-3"></span> Danh sách</a>
+
+                </li>
+                <li>
+                    <a href="@Url.Action("HoaDon","Admin")"><span class="fa fa-sticky-note mr-3"></span> Hóa đơn</a>
+
+                </li>
+                <li>
+                    <a href="@Url.Action("ThemSanPham","Admin")"><span class="fa fa-sticky-note mr-3"></span> Thêm</a>
+
+                </li>
+                <li>
+                    <a href="@Url.Action("Dangnhap","Admin")"><span class="fa fa-sticky-note mr-3"></span> Đăng xuất</a>
+                </li>
+            </ul>
+
+        </nav>
+        <!-- Page Content  -->
+        <div id="content">
+            <div style="background-color: black;height: 100px; margin-bottom: 20px;"></div>
+            <div class="container">
+                @RenderBody()
+            </div>
+        </div>
+        <script src="~/Content/Data/bootstrap.min.js"></script>
+        <script src="~/Content/Data/jquery.min.js"></script>
+        <script src="~/Content/Data/main.js"></script>
+        <script src="~/Content/Data/popper.js"></script>
+        <script type="text/javascript">
+            function DisplayHoaDon(id) {
+                var str = '<h3 style="text-align: center;margin-top: 5rem;">Chi Tiết Hóa Đơn</h3><table class="table table-striped" id = "ChiTietHoaDon" style="text-align:center"><thead ><tr><th>Số Hóa Đơn</th><th>Tên Thiết bị</th><th style="max-width:150px">Ảnh</th><th>Số lượng</th><th>Giá Bán</th><th>Thành tiền</th></tr></thead ><tbody>';
+                $.ajax({
+                    type: 'GET',
+                    url: 'https://localhost:7210/Admin/ChiTietHoaDon?SoHD=' + id,
+                    dataType: 'JSON',
+                    success: function (data) {
+                        $.each(data, function (key, val) {
+                            var num = val.GiaBan;
+                            var num2 = val.ThanhTien;
+                            var gia = num.toLocaleString() + " VNĐ";
+                            var gia2 = num2.toLocaleString() + " VNĐ";
+                            str += '<tr><td>' + val.SoHDB + '</td><td>' + val.TenThietBi + '</td><td><img src="' + val.AnhThietBi + '" style="max-width:150px" ></td><td>' + val.SoLuong + '</td><td>' + gia + '</td><td>' + gia2 + '</td></tr>';
+                        });
+                        str += '</tbody></table >';
+                        $('#ChiTietHoaDon').html(str);
+                    },
+                    error: function (e) {
+                        alert(e.message);
+                    }
+                });
+            }
+        </script>
+</body>
+</html>

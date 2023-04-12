@@ -1,0 +1,74 @@
+﻿@using BTL_Web_Nhom7.Models;
+@using X.PagedList.Mvc.Core;
+@model X.PagedList.PagedList<ThietBiYte>
+@{
+    ViewBag.Title = "Danhsach";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div id="content" class="">
+    <div class="container" style="width:100%;">
+        <a href="@Url.Action("ThemSanPham","Admin")" style="float: right;"><button class="btn btn-info">Thêm mới</button></a>
+        @using (Html.BeginForm())
+        {
+            <button type="submit" class="btn btn-info">Chọn</button>
+            <hr style="height: 0;" />
+            @Html.DropDownList("MaLoai", null, htmlAttributes: new { @class = "form-control", id = "MaLoai" })
+            <hr style="height: 0;" />
+            <div style="text-align:center; color:red">@ViewBag.Loai</div>
+        }
+        <br>
+        <table class="table table-bordered" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>ID</th>
+                    <th>Tên</th>
+                    <th>Giá</th>
+                    <th>Giới Thiệu</th>
+                    <th>Ảnh</th>
+                    <th>Tùy chọn</th>
+                </tr>
+            </thead>
+            <tbody id="data">
+                @{
+                    if (Model != null)
+                    {
+                        int stt = 1;
+                        foreach (var i in Model)
+                        {
+                            String Gia = i.GiaBan > 0 ? String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", i.GiaBan) : "Call!";
+                            String ChietKhau = i.GiamGia > 0 ? i.GiamGia.ToString() + "%" : "";
+                            if (i.GiamGia > 0 && i.GiaBan > 0)
+                            {
+                                double t = (double)i.GiamGia;
+                                double tien = (double)i.GiaBan * (1 - t);
+                                Gia = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", tien);
+                                ChietKhau = String.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:c}", i.GiaBan);
+                            }
+                            <tr>
+                                <td>@stt</td>
+                                <td>@i.MaThietBi</td>
+                                <td style="max-width : 200px">@i.TenThietBi</td>
+                                <td style="max-width : 200px"><div class="detail-price-goc">@Gia </div> <div class="detail-price-dis">@ChietKhau</div></td>
+                                <td style="max-width : 300px">@i.GioiThieu</td>
+                                <td style="width : 200px"><img src="@i.Anh" style="width : 200px; height : 200px " title="@i.TenThietBi" /></td>
+                                <td>
+                                    @Html.ActionLink("Sửa", "SuaSanPham", new { MaSP = i.MaThietBi })|@Html.ActionLink("Chi tiết", "ChiTietSanPham", "BanHang", new { MaSP = i.MaThietBi }, new { target = "_blank" })
+                                </td>
+
+                            </tr>
+                            stt++;
+                        }
+                    }
+
+                }
+
+            </tbody>
+        </table>
+
+        @Html.PagedListPager(Model, page => Url.Action("DanhSach", new {page=page}), new X.PagedList.Web.Common.PagedListRenderOptions(){
+        LiElementClasses = new List<String> {"page-item"},
+        PageClasses = new List<String> {"page-link"}
+        })
+    </div>
+</div>

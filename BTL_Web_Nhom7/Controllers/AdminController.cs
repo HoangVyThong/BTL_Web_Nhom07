@@ -1,5 +1,6 @@
 ﻿using BTL_Web_Nhom7.Models;
 using BTL_Web_Nhom7.Models.Authentication;
+using BTL_Web_Nhom7.Models.HoaDonModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -33,18 +34,19 @@ namespace BTL_Web_Nhom7.Controllers
         {
             if (HttpContext.Session.GetString("Name") != null)
             {
-                HttpContext.Session.SetString("Name", null);
+
+                RedirectToAction("TrangChu", "Admin");
             }
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Dangnhap(FormCollection f)
+        public IActionResult Dangnhap(IFormCollection f)
         {
             using (MD5 md5Hash = MD5.Create())
             {
-                String sTaiKhoan = f["name"].ToString();
+                String sTaiKhoan = f["username"].ToString();
                 String sMatKhau = GetMd5Hash(md5Hash, f["password"].ToString());
                 var NguoiDung = from p in db.TaiKhoans
                                 where p.UserName == sTaiKhoan && p.Password == sMatKhau
@@ -79,36 +81,27 @@ namespace BTL_Web_Nhom7.Controllers
         [Authentication]
         public IActionResult HoaDon(int? page)
         {
-            var listHoaDons = db.HoaDonBans.ToList();
+            var listHoaDons = from p in db.HoaDonBans
+                              join q in db.ChiTietHdbs on p.SoHdb equals q.SoHdb
+                              join e in db.KhachHangs on p.MaKh equals e.MaKh
+                              select new HoaDonDTO
+                              {
+                                  SoHdb = p.SoHdb,
+                                  TenKh = e.TenKh,
+                                  DienThoai = e.DienThoai,
+                                  DiaChi = e.DiaChi,
+                                  NgayLap = p.NgayLap,
+                                  ThanhTien = q.ThanhTien
+                              };
+            listHoaDons.ToList();
             int pagesize = 20;
             int pagenumber = (page ?? 1) > pagesize ? (page ?? 1) : 1;
-            if (listHoaDons.Count == 0)
+            if (listHoaDons.Count() == 0)
             {
                 ViewBag.ThongBao = "Không tìm thấy hóa đơn";
-                return View(db.HoaDonBans.OrderBy(n => n.SoHdb).ToPagedList(pagenumber, pagesize));
+                return View(listHoaDons.OrderByDescending(n => n.NgayLap).ToPagedList(pagenumber, pagesize));
             }
             return View(listHoaDons.OrderByDescending(n => n.NgayLap).ToPagedList(pagenumber, pagesize));
-        }
-        [Authentication]
-        public PartialViewResult PartialHoaDon(string SoHD = "HDB_1")
-        {
-            if (SoHD == null)
-            {
-                return PartialView();
-            }
-            var hoaDonBan = db.HoaDonBans.SingleOrDefault(n => n.SoHdb == SoHD);
-            if (hoaDonBan == null)
-            {
-                return PartialView();
-            }
-            var chiTietHDBs = db.ChiTietHdbs.Where(n => n.SoHdb == SoHD).ToList();
-            Decimal? TongTien = 0;
-            foreach (var t in chiTietHDBs)
-            {
-                TongTien += t.ThanhTien;
-            }
-            ViewBag.TongTien = TongTien;
-            return PartialView(hoaDonBan);
         }
         [Authentication]
         public IActionResult ChiTietHoaDon(string SoHD)
@@ -126,11 +119,10 @@ namespace BTL_Web_Nhom7.Controllers
                         ThanhTien = p.ThanhTien
                     };
             return View(s);
-            //return Json(s, JsonRequestBehavior.AllowGet);
         }
         [Authentication]
         [HttpPost]
-        public IActionResult Danhsach(FormCollection f, int? page)
+        public IActionResult Danhsach(IFormCollection f, int? page)
         {
             var t = new List<LoaiThietBi>();
             foreach (var i in db.LoaiThietBis.ToList().OrderBy(n => n.TenLoai))

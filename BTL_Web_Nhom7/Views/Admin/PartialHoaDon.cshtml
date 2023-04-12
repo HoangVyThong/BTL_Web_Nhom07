@@ -1,0 +1,44 @@
+﻿
+@using BTL_Web_Nhom7.Models.HoaDonModel;
+@model HoaDonDTO
+
+@{
+    var t = "class='active'";
+    if (Model.ThanhTien != null && Model.ThanhTien != 0)
+    {
+        t = "style = 'cursor: pointer', onclick = 'DisplayHoaDon(&apos;" + @Model.SoHdb + "&apos;); return false'";
+    }
+
+}
+<tr @Html.Raw(t)>
+    <td style="max-width:150px">@Model.SoHdb</td>
+    <td>@Model.TenKh</td>
+    <td>@Model.DienThoai</td>
+    <td>@Model.DiaChi</td>
+    <td>@Model.NgayLap</td>
+    <td style="color:red" >@Model.ThanhTien</td>
+</tr>
+
+<script type="text/javascript">
+            function DisplayHoaDon(id) {
+                alert("OK");
+                alert('https://localhost:7120/Admin/ChiTietHoaDon?SoHD=' + id);
+                var str = '<table class="table table-striped">< thead ><tr><th>Số Hóa Đơn</th><th>Tên Khách Hàng</th><th>Ngày Mua</th><th>Thành tiền</th></tr></thead ><tbody>';
+                $.ajax({
+                    type: 'GET',
+                    url: 'https://localhost:7120/Admin/ChiTietHoaDon?SoHD=' + id,
+                    dataType: 'JSON',
+                    success: function (data) {
+                        $.each(data, function (key, val) {
+                            str += '<tr><td>' + val.MaSP + '</td><td>' + val.TenSP + '</td><td>' + val.GioiThieuSP + '</td></tr>';
+                        });
+                        str += '</tbody></table >';
+                        $('#ChiTietHoaDon').html(str);
+                    },
+                    error: function (xhr) {
+                        console.log("err");
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        </script>

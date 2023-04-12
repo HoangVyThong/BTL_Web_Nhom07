@@ -148,14 +148,6 @@ namespace BTL_Web_Nhom7.Controllers
             t = (double)listGioHang.Sum(n => n.ThanhTien);
             return t;
         }
-        public ActionResult GioHangPartial()
-        {
-            if (TongSoLuong() != 0)
-            {
-                ViewBag.TongSoLuong = TongSoLuong();
-            }
-            return PartialView();
-        }
         public ActionResult SuaGioHang()
         {
             return View();

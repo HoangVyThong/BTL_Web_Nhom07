@@ -7,11 +7,14 @@ namespace BTL_Web_Nhom7.Models.Authentication
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            context.Result = new RedirectToRouteResult(new RouteValueDictionary
+            if(context.HttpContext.Session.GetString("Name") == null)
+            {
+                context.Result = new RedirectToRouteResult(new RouteValueDictionary
                 {
                     { "Controller", "Admin" },
                     {"Action", "DangNhap" }
                 });
+            }
         }
     }
 }
