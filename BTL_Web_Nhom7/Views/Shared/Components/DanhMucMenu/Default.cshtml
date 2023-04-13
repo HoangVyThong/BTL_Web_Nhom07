@@ -133,6 +133,8 @@
             url:getUrl,
             dataType:'json',
             success:function(data){
+                    str += `<section class="homeproducts">`
+                    str += ` <div class="container" >`
                     str += `<div class="products-row">`
                     str += `<h2 class="homeproducts-title"><a href="./cham-soc-suc-khoe-gia-dinh.html" title="Chăm sóc sức khỏe gia đình">${tendanhmuc}</a></h2>`
                 $.each(data,function(key, val){
@@ -154,6 +156,8 @@
 				                
                 });
                     str += `</div>`
+                    str +=	`</div`
+                    str+=`</section>`
 				
                 $('#ele-for-render-ajax').html(str);
             },
@@ -171,6 +175,8 @@
             url: getUrl,
             dataType: 'json',
             success: function (data) {
+                 str += `<section class="homeproducts">`
+                    str += ` <div class="container" >`
                 str += `<div class="products-row">`
                 str += `<h2 class="homeproducts-title"><a href="./cham-soc-suc-khoe-gia-dinh.html" title="Chăm sóc sức khỏe gia đình">${tendanhmuc}</a></h2>`
                 $.each(data, function (key, val) {
@@ -192,7 +198,8 @@
 
                 });
                 str += `</div>`
-
+                str +=	`</div`
+                str+=`</section>`
                 $('#ele-for-render-ajax').html(str);
             },
 

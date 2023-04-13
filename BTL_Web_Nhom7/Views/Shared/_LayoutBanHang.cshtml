@@ -48,7 +48,7 @@
                                     @{
                                         if (ViewBag.TongSoLuong != null)
                                         {
-                                            <span id="sl" style="font-size:14px">@ViewBag.TongSoLuong</span>
+                                                                            <span id="sl" style="font-size:14px">@ViewBag.TongSoLuong</span>
                                         }
                                     }
 
@@ -58,9 +58,24 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>border-color:
+            #398439
+            border-radius:
+            4px
+            border-style:
+            solid
+            border-width:
+            1px
+            font-size:
+            14px
+            line-height:
+            20px
+            padding:
+            6px 12px
+            text-align:
+            center
             <div class="hotline" style="position: absolute; padding: 20px 0; padding-top: 20px; padding-right: 50px; padding-bottom: 20px; padding-left: 0px; margin-top: 15px;right:0;left:unset;">
-                <span style="float:right"><a href="@Url.Action("Dangnhap","Admin")">Đăng nhập</a></span>
+                <span style="float:right;background-color: #2f79c4;line-height:20px;border-width:1px;border-color:#398439;border-radius:4px;padding:6px 12px;text-align:center"><a style="color: white;text-decoration: none" href="@Url.Action("Dangnhap","Admin")">Đăng nhập</a></span>
             </div>
         </div>
         <div class="menuheader">
@@ -74,13 +89,12 @@
             </div>
         </div>
     </header>
-    <section>
-        <section class="homeproducts">
-            <div class="container" id="ele-for-render-ajax">
+    <section id="ele-for-render-ajax">
+         
         @RenderBody()
-            </div>
-        </section>
-    </section>
+          
+     </section>
+        
     <section>
         <footer>
             <div class="container">

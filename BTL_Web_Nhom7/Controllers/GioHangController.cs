@@ -11,7 +11,10 @@ namespace BTL_Web_Nhom7.Controllers
     {
         BtlWebContext db = new BtlWebContext();
         public const string CARTKEY = "GioHang";
-
+        public IActionResult ThanhToanThanhCong()
+        {
+            return View();
+        }
         // Lấy cart từ Session (danh sách CartItem)
         List<GioHang> GetCartItems()
         {
@@ -232,8 +235,9 @@ namespace BTL_Web_Nhom7.Controllers
             }
             HttpContext.Session.Remove("GioHang");
             db.SaveChanges();
-            return RedirectToAction("TrangChu", "BanHang");
+            return RedirectToAction("ThanhToanThanhCong", "GioHang");
         }
+       
         #endregion  
     }
 }
