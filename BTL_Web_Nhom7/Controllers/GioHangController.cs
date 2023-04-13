@@ -58,7 +58,12 @@ namespace BTL_Web_Nhom7.Controllers
                     gioHang.DonGia = gia;
                 gioHang.SoLuong = int.Parse(f["Soluong"].ToString());
                 if (gioHang.SoLuong > 0)
+                {
                     gioHangs.Add(gioHang);
+                    SaveCartSession(gioHangs);
+                }
+                    
+
                 //return Redirect("/GioHang/GioHang");
             }
             else
@@ -67,19 +72,18 @@ namespace BTL_Web_Nhom7.Controllers
                 if (sanpham.SoLuong + soluong < gioHang.SoLuong)
                 {
                     gioHang.SoLuong += soluong;
-                    string jsoncart = JsonConvert.SerializeObject(gioHangs);
-                    session.SetString(CARTKEY, jsoncart);
+                    
+                    SaveCartSession(gioHangs);
                 }
 
                 else
                 {
                     gioHang.SoLuong = (int)sanpham.SoLuong;
-                    string jsoncart = JsonConvert.SerializeObject(gioHangs);
-                    session.SetString(CARTKEY, jsoncart);
+                    SaveCartSession(gioHangs);
                 }
 
             }
-            SaveCartSession(gioHangs);
+            
             return Redirect("/Giohang/GioHang");
 
         }
@@ -103,7 +107,7 @@ namespace BTL_Web_Nhom7.Controllers
             }
             return RedirectToAction("GioHang");
         }
-        public ActionResult Xoa(string MaThietBi)
+        public IActionResult Xoa(string MaThietBi)
         {
             //kiểm tra mã sản phẩm
             MaThietBi = MaThietBi.Split(')')[0];
@@ -129,9 +133,10 @@ namespace BTL_Web_Nhom7.Controllers
 
         public IActionResult GioHang()
         {
-            var gioHangs = HttpContext.Session.GetString("GioHang");
+            
             ViewBag.TongTien = TongTien();
             ViewBag.SoLuong = TongSoLuong();
+            
             return View(GetCartItems());
         }
         public int TongSoLuong()
@@ -156,30 +161,32 @@ namespace BTL_Web_Nhom7.Controllers
 
         #region Đặt hàng
         [HttpGet]
-        public ActionResult ThanhToan()
+        public IActionResult ThanhToan()
         {
             if (HttpContext.Session.GetString("GioHang") == null)
             {
                 return RedirectToAction("TrangChu", "BanHang");
             }
             List<GioHang> gioHangs = GetCartItems();
+
             ViewBag.TongTien = TongTien();
             ViewBag.SoLuong = TongSoLuong();
             return View(gioHangs);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ThanhToan(IFormCollection f)
+        public IActionResult ThanhToan(IFormCollection f)
         {
-            List<GioHang> lstGioHang = GetCartItems();
-            foreach (var item in lstGioHang)
+            List<GioHang> gioHangs = GetCartItems();
+            
+            foreach (var item in gioHangs)
             {
                 var t = db.ThietBiYtes.SingleOrDefault(n => n.MaThietBi == item.MaThietBi);
                 if (t.SoLuong < item.SoLuong)
                 {
                     ViewBag.Loi = item.TenThietBi + " không đủ!";
                     Xoa(item.MaThietBi);
-                    return View(lstGioHang);
+                    return View(gioHangs);
                 }
             }
             //lưu thông tin vào hóa đơn bán
@@ -192,14 +199,14 @@ namespace BTL_Web_Nhom7.Controllers
             KhachHang khachHang = new KhachHang();
             if (check == 0)
             {
-                int Sl = db.KhachHangs.ToList().Count > 0 ? db.KhachHangs.ToList().Count + 1 : 1;
-                String MaKH = "KH_" + Sl.ToString();
+                int Sl = db.KhachHangs.ToList().Count();
+                string MaKH = "KH_" + (Sl+2).ToString();
                 khachHang.MaKh = MaKH;
                 khachHang.TenKh = name;
                 khachHang.Email = email;
                 khachHang.DienThoai = phone;
                 khachHang.DiaChi = address;
-                hd.MaKhNavigation = khachHang;
+                
                 db.KhachHangs.Add(khachHang);
             }
             else
@@ -208,10 +215,12 @@ namespace BTL_Web_Nhom7.Controllers
             }
             hd.MaKh = khachHang.MaKh;
             hd.NgayLap = DateTime.Now;
-            hd.SoHdb = "HDB_" + ((db.HoaDonBans.ToList().Count() + 1) > 0 ? (db.HoaDonBans.ToList().Count() + 1) : 1).ToString();
+            int sl1 = (db.HoaDonBans.ToList().Count() + 2);
+            hd.SoHdb = "HDB_" + sl1.ToString();
+
             db.HoaDonBans.Add(hd);
             db.SaveChanges();
-            foreach (var item in lstGioHang)
+            foreach (var item in gioHangs)
             {
                 ChiTietHdb cthd = new ChiTietHdb();
                 cthd.SoHdb = hd.SoHdb;
