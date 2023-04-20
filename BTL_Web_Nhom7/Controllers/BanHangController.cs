@@ -192,12 +192,7 @@ namespace BTL_Web_Nhom7.Controllers
             }
             return PartialView(listSP);
         }
-        public IActionResult TimKiem(FormCollection f)
-        {
-            string t = f["timkiem"];
-            var thietBiYTes = db.ThietBiYtes.Where(n => n.TenThietBi.Contains(t)).ToList();
-            return View(thietBiYTes);
-        }
+
 
         [HttpPost]
         public IActionResult SearchResults(IFormCollection f, int? page)
@@ -217,22 +212,22 @@ namespace BTL_Web_Nhom7.Controllers
             ViewBag.ThongBao = "Đã tìm thấy " + lstSearchResults.Count + " sản phẩm";
             return View(lstSearchResults.OrderBy(n => n.TenThietBi).ToPagedList(pagenumber, pagesize));
         }
-        [HttpGet]
-        public IActionResult SearchResults(int? page, string searchkey)
-        {
-            ViewBag.keyword = searchkey;
-            var lstSearchResults = db.ThietBiYtes.Where(n => n.TenThietBi.Contains(searchkey)).ToList();
-            int pagenumber = (page ?? 1);
-            int pagesize = 20;
-            if (lstSearchResults.Count == 0)
-            {
-                ViewBag.ThongBao = "Không tìm thấy sản phẩm bạn tìm kiếm";
-                //nếu không tìm thấy sản phẩm nào thì xuất ra toàn bộ sản phẩm7
-                return View(db.ThietBiYtes.OrderBy(n => n.TenThietBi).ToPagedList(pagenumber, pagesize));
-            }
-            ViewBag.ThongBao = "Đã tìm thấy " + lstSearchResults.Count + "  sản phẩm";
-            return View(lstSearchResults.OrderBy(n => n.TenThietBi).ToPagedList(pagenumber, pagesize));
-        }
+        //[HttpGet]
+        //public IActionResult SearchResults(int? page, string searchkey)
+        //{
+        //    ViewBag.keyword = searchkey;
+        //    var lstSearchResults = db.ThietBiYtes.Where(n => n.TenThietBi.Contains(searchkey)).ToList();
+        //    int pagenumber = (page ?? 1);
+        //    int pagesize = 20;
+        //    if (lstSearchResults.Count == 0)
+        //    {
+        //        ViewBag.ThongBao = "Không tìm thấy sản phẩm bạn tìm kiếm";
+        //        //nếu không tìm thấy sản phẩm nào thì xuất ra toàn bộ sản phẩm7
+        //        return View(db.ThietBiYtes.OrderBy(n => n.TenThietBi).ToPagedList(pagenumber, pagesize));
+        //    }
+        //    ViewBag.ThongBao = "Đã tìm thấy " + lstSearchResults.Count + "  sản phẩm";
+        //    return View(lstSearchResults.OrderBy(n => n.TenThietBi).ToPagedList(pagenumber, pagesize));
+        //}
 
     }
 }
