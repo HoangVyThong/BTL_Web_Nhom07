@@ -1,0 +1,62 @@
+﻿ 
+<script src="../Content/Data/js/jquery.js"></script>
+<div class="search">
+
+
+
+    <input id="ipText" type="text" placeholder="Nhập sản phẩm bạn cần tìm vào đây" />
+  
+    <button onclick="showProduct()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+   </svg>
+    </button>
+ </div>
+ @section Scripts{
+  <script>
+    function showProduct() {
+        console.log(1)
+        var str = '';
+        var inputValue = document.getElementById("ipText").value;
+
+        jQuery.ajax({
+            type: 'GET',
+            url: `https://localhost:7120/api/SearchAPI/${inputValue}`,
+            dataType: 'json',
+            success: function (data) {
+                  str += `<section class="homeproducts">`
+                    str += ` <div class="container" >`
+                    str += `<div class="products-row">`
+                    str += `<h2 class="homeproducts-title"><a href="./cham-soc-suc-khoe-gia-dinh.html" title="Chăm sóc sức khỏe gia đình">${tendanhmuc}</a></h2>`
+                $.each(data,function(key, val){
+
+                    str += `<div class="col-md-3 productsbox">`
+                    str += `<div class="btn05">
+							<div class="productsbox-img">
+								<a href="./may-do-duong-huyet-accu-chek-instant.html" title="Máy đo đường huyết Accu Chek Instant">
+									<img src="${val.results.anh}" title="Máy đo đường huyết Accu Chek Instant" alt="Máy đo đường huyết Accu Chek Instant" data-alt-src="${val.anh}"></a></div>
+							<div class="ovrly"></div>
+							<div class="buttons">
+								<a href="./may-do-duong-huyet-accu-chek-instant.html" title="Máy đo đường huyết Accu Chek Instant" class="fa fa-link"></a>
+								<a href="#" class="fa fa-search"></a>
+							</div>
+						</div>
+						<h3 class="productsbox-name"><a href="/BanHang/ChiTietSanPham?MaSP=${val.results.maThietBi}" title="Máy đo đường huyết Accu Chek Instant">${val.tenThietBi}</a></h3>
+						<div class="productsbox-price"><div class="price-goc">${val.results.giaBan} VNĐ</div> <div class="price-dis"></div></div>`
+                    str += `</div>`
+				                
+                });
+                    str += `</div>`
+                    str +=	`</div`
+                    str+=`</section>`
+                $('#ele-for-render-ajax').html(str);
+            },
+
+            Erorr: function (xhr) {
+                alert(xhr.responseText)
+            }
+        });
+    }
+
+    </script>
+ }
