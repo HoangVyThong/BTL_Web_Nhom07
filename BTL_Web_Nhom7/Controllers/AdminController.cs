@@ -43,28 +43,21 @@ namespace BTL_Web_Nhom7.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Dangnhap(IFormCollection f)
+        public IActionResult Dangnhap(TaiKhoan taikhoan)
         {
-            using (MD5 md5Hash = MD5.Create())
+
+            if (HttpContext.Session.GetString("TenTaiKhoan") == null)
             {
-                String sTaiKhoan = f["username"].ToString();
-                String sMatKhau = GetMd5Hash(md5Hash, f["password"].ToString());
-                var NguoiDung = from p in db.TaiKhoans
-                                where p.TenTaiKhoan == sTaiKhoan && p.Password == sMatKhau
-                                select p;
-                if (NguoiDung.Count() == 0)
+                var u = db.TaiKhoans.Where(x=>x.TenTaiKhoan.Equals(taikhoan.TenTaiKhoan) && x.Password.Equals(taikhoan.Password)).FirstOrDefault();
+                if(u != null)
                 {
-                    ViewBag.Thongbao = "Tài khoản hoặc mật khẩu sai";
-                    return View();
+                    HttpContext.Session.SetString("TenTaiKhoan", u.TenTaiKhoan.ToString());
+                    return RedirectToAction("TrangChu", "BanHang");
                 }
-                else
-                {
-                    string Id = db.TaiKhoans.SingleOrDefault(n => n.TenTaiKhoan == sTaiKhoan).TenTaiKhoan;
-                    
-                    HttpContext.Session.SetString("Name","Minh");
-                    return RedirectToAction("TrangChu", "Admin");
-                }
+               
             }
+            return View();
+
         }
         [Authentication]
         public IActionResult TrangChu()
@@ -257,5 +250,22 @@ namespace BTL_Web_Nhom7.Controllers
             }
             return RedirectToAction("TrangChu");
         }
+
+        public int splitId(string id)
+        {
+            //KH002 
+            string res = id.Substring(2, id.Length-2);
+            return int.Parse(res);
+        }
+
+
+        public IActionResult DangKy()
+        {
+            var lastCustomer = db.KhachHangs.ToList();
+            int lastId = splitId(lastCustomer.OrderByDescending(x => splitId(x.MaKh)).FirstOrDefault().MaKh.ToString());
+            ViewBag.lastId = lastId;
+            return View(lastId);
+        }
+
     }
 }
