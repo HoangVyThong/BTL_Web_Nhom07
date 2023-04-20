@@ -7,7 +7,7 @@ namespace BTL_Web_Nhom7.Controllers
     public class BanHangController : Controller
     {
         // GET: Index
-        BtlWebContext db = new BtlWebContext();
+        BtlApiContext db = new BtlApiContext();
         public IActionResult TrangChu()
         {
 			var danhMucs = db.DanhMucs.ToList();

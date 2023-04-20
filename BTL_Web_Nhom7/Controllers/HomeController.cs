@@ -7,7 +7,7 @@ namespace BTL_Web_Nhom7.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        BtlWebContext db = new BtlWebContext();
+        BtlApiContext db = new BtlApiContext();
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;

@@ -55,7 +55,7 @@
                                 @using (Html.BeginForm("DangNhap", "Admin", FormMethod.Post)){
                                 @Html.AntiForgeryToken()
                                 <div class="form-group first">
-                                   @Html.TextBoxFor(x=>x.UserName, new{@class="form-control",name="username" ,id="Username",placeholder="Username", required="required", autofocus="autofocus"})
+                                   @Html.TextBoxFor(x=>x.TenTaiKhoan, new{@class="form-control",name="username" ,id="Username",placeholder="Username", required="required", autofocus="autofocus"})
                                 </div>
                                 <div class="form-group last mb-4">
                                     @Html.TextBoxFor(x=>x.Password, new{@class="form-control",name="password",placeholder="Password", type="Password"})

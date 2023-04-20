@@ -8,8 +8,8 @@ namespace BTL_Web_Nhom7.Controllers
     [ApiController]
     public class SearchAPIController : ControllerBase
     {
-        BtlWebContext db = new BtlWebContext();
-          [Route("{searchkey}")]
+        BtlApiContext db = new BtlApiContext();
+        [Route("{searchkey}")]
         public IActionResult Search(string searchkey)
         {
             var lstSearchResults = db.ThietBiYtes

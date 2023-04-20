@@ -14,7 +14,7 @@ namespace BTL_Web_Nhom7.Controllers
     public class AdminController : Controller
     {
         // GET: Admin
-        BtlWebContext db = new BtlWebContext();
+        BtlApiContext db = new BtlApiContext();
         static string GetMd5Hash(MD5 md5Hash, string input)
         {
             // Convert the input string to a byte array and compute the hash.
@@ -50,7 +50,7 @@ namespace BTL_Web_Nhom7.Controllers
                 String sTaiKhoan = f["username"].ToString();
                 String sMatKhau = GetMd5Hash(md5Hash, f["password"].ToString());
                 var NguoiDung = from p in db.TaiKhoans
-                                where p.UserName == sTaiKhoan && p.Password == sMatKhau
+                                where p.TenTaiKhoan == sTaiKhoan && p.Password == sMatKhau
                                 select p;
                 if (NguoiDung.Count() == 0)
                 {
@@ -59,9 +59,9 @@ namespace BTL_Web_Nhom7.Controllers
                 }
                 else
                 {
-                    string Id = db.TaiKhoans.SingleOrDefault(n => n.UserName == sTaiKhoan).Id;
-                    string name = db.ChuQuanLies.SingleOrDefault(n => n.Id == Id).Ten.Split().LastOrDefault();
-                    HttpContext.Session.SetString("Name",name);
+                    string Id = db.TaiKhoans.SingleOrDefault(n => n.TenTaiKhoan == sTaiKhoan).TenTaiKhoan;
+                    
+                    HttpContext.Session.SetString("Name","Minh");
                     return RedirectToAction("TrangChu", "Admin");
                 }
             }
@@ -199,7 +199,7 @@ namespace BTL_Web_Nhom7.Controllers
         public IActionResult ThemSanPham()
         {
             ViewBag.MaLoai = new SelectList(db.LoaiThietBis.ToList().OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
-            ViewBag.MaHang = new SelectList(db.HangThietBis.ToList().OrderBy(n => n.Ten), "MaHang", "Ten");
+            ViewBag.MaHang = new SelectList(db.HangThietBis.ToList().OrderBy(n => n.TenHang), "MaHang", "Ten");
             int MaThietBi = db.ThietBiYtes.ToList().Count + 1;
             while (true)
             {
@@ -241,7 +241,7 @@ namespace BTL_Web_Nhom7.Controllers
                 return NotFound();
             }
             ViewBag.MaLoai = new SelectList(db.LoaiThietBis.ToList().OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
-            ViewBag.MaHang = new SelectList(db.HangThietBis.ToList().OrderBy(n => n.Ten), "MaHang", "Ten");
+            ViewBag.MaHang = new SelectList(db.HangThietBis.ToList().OrderBy(n => n.TenHang), "MaHang", "Ten");
 
             return View(thietbi);
         }

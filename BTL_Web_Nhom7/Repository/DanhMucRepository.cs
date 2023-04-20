@@ -4,9 +4,9 @@ namespace BTL_Web_Nhom7.Repository
 {
     public class DanhMucRepository : IDanhMucRepository
     {
-        private readonly BtlWebContext _context;
+        private readonly BtlApiContext _context;
 
-        public DanhMucRepository(BtlWebContext context)
+        public DanhMucRepository(BtlApiContext context)
         {
             _context = context;
         }

@@ -9,7 +9,7 @@ namespace BTL_Web_Nhom7.Controllers
 {
     public class GioHangController : Controller
     {
-        BtlWebContext db = new BtlWebContext();
+        BtlApiContext db = new BtlApiContext();
         public const string CARTKEY = "GioHang";
         public IActionResult ThanhToanThanhCong()
         {

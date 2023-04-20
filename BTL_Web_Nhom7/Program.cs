@@ -6,8 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-var connectionString = builder.Configuration.GetConnectionString("BtlWebContext");
-builder.Services.AddDbContext<BtlWebContext>(option => option.UseSqlServer(connectionString));
+var connectionString = builder.Configuration.GetConnectionString("BtlApiContext");
+builder.Services.AddDbContext<BtlApiContext>(option => option.UseSqlServer(connectionString));
 builder.Services.AddScoped<IDanhMucRepository, DanhMucRepository>();
 builder.Services.AddDistributedMemoryCache();
 

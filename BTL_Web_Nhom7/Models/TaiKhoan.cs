@@ -5,11 +5,13 @@ namespace BTL_Web_Nhom7.Models;
 
 public partial class TaiKhoan
 {
-    public string Id { get; set; } = null!;
-
-    public string UserName { get; set; } = null!;
+    public string TenTaiKhoan { get; set; } = null!;
 
     public string? Password { get; set; }
 
-    public virtual ICollection<ChuQuanLy> ChuQuanLies { get; } = new List<ChuQuanLy>();
+    public int? MaLoaiTaiKhoan { get; set; }
+
+    public virtual ICollection<KhachHang> KhachHangs { get; } = new List<KhachHang>();
+
+    public virtual LoaiTaiKhoan? MaLoaiTaiKhoanNavigation { get; set; }
 }

@@ -11,5 +11,7 @@ public partial class HoaDonBan
 
     public DateTime? NgayLap { get; set; }
 
+    public virtual ICollection<ChiTietHdb> ChiTietHdbs { get; } = new List<ChiTietHdb>();
+
     public virtual KhachHang? MaKhNavigation { get; set; }
 }

@@ -9,9 +9,11 @@ public partial class ChiTietHdb
 
     public string SoHdb { get; set; } = null!;
 
-    public int SoLuong { get; set; }
+    public int? SoLuong { get; set; }
 
     public decimal? ThanhTien { get; set; }
 
     public virtual ThietBiYte MaThietBiNavigation { get; set; } = null!;
+
+    public virtual HoaDonBan SoHdbNavigation { get; set; } = null!;
 }
