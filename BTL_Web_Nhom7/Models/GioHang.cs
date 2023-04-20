@@ -2,7 +2,7 @@
 {
     public class GioHang
     {
-        BtlWebContext db = new BtlWebContext();
+        BtlApiContext db = new BtlApiContext();
         public string MaThietBi { get; set; }
         public string TenThietBi { get; set; }
         public string Anh { get; set; }

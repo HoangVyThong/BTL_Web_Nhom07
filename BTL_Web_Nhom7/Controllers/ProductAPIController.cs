@@ -9,8 +9,8 @@ namespace BTL_Web_Nhom7.Controllers
     [ApiController]
     public class ProductAPIController : ControllerBase
     {
-        BtlWebContext db = new BtlWebContext();
-       
+        BtlApiContext db = new BtlApiContext();
+
         [Route("{maLoai}")]
         public IEnumerable<ProductDTO> GetProductByMaLoai(string maLoai)
         {

@@ -10,7 +10,7 @@ namespace BTL_Web_Nhom7.Controllers
     [ApiController]
     public class ChiTietHoaDonAPIController : ControllerBase
     {
-        BtlWebContext db = new BtlWebContext();
+        BtlApiContext db = new BtlApiContext();
         [Authentication]
         [Route("{SoHD}")]
         public IEnumerable<ChiTietHoaDonDTO> GetChiTietHoaDon(string SoHD)

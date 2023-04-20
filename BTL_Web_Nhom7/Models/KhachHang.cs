@@ -15,5 +15,9 @@ public partial class KhachHang
 
     public string? Email { get; set; }
 
+    public string? TenTaiKhoan { get; set; }
+
     public virtual ICollection<HoaDonBan> HoaDonBans { get; } = new List<HoaDonBan>();
+
+    public virtual TaiKhoan? TenTaiKhoanNavigation { get; set; }
 }

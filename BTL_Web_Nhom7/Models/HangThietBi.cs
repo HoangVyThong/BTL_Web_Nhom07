@@ -7,7 +7,7 @@ public partial class HangThietBi
 {
     public string MaHang { get; set; } = null!;
 
-    public string? Ten { get; set; }
+    public string? TenHang { get; set; }
 
     public virtual ICollection<ThietBiYte> ThietBiYtes { get; } = new List<ThietBiYte>();
 }
