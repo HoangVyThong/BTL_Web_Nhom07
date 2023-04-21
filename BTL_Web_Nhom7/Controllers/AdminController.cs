@@ -201,7 +201,7 @@ namespace BTL_Web_Nhom7.Controllers
         public IActionResult ThemSanPham()
         {
             ViewBag.MaLoai = new SelectList(db.LoaiThietBis.ToList().OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
-            ViewBag.MaHang = new SelectList(db.HangThietBis.ToList().OrderBy(n => n.TenHang), "MaHang", "Ten");
+            ViewBag.MaHang = new SelectList(db.HangThietBis.ToList().OrderBy(n => n.TenHang), "MaHang", "TenHang");
             int MaThietBi = db.ThietBiYtes.ToList().Count + 1;
             while (true)
             {
