@@ -52,24 +52,33 @@ namespace BTL_Web_Nhom7.Controllers
                 if(u != null)
                 {
                     HttpContext.Session.SetString("TenTaiKhoan", u.TenTaiKhoan.ToString());
-                    return RedirectToAction("TrangChu", "BanHang");
+                    if (u.MaLoaiTaiKhoan == 1)
+                    {
+                        return RedirectToAction("TrangChu", "BanHang");
+                    }
+                    else
+                    {
+                        return RedirectToAction("TrangChu", "Admin");
+                    }
+
+                   
                 }
                
             }
             return View();
 
         }
-        [Authentication]
+        //[Authentication]
         public IActionResult TrangChu()
         {
-            if (HttpContext.Session.GetString("Name") == null)
-            {
-                return RedirectToAction("Dangnhap", "Admin");
-            }
-            else
-            {
-                HttpContext.Session.SetString("Name", HttpContext.Session.GetString("Name"));
-            }
+            //if (HttpContext.Session.GetString("Name") == null)
+            //{
+            //    return RedirectToAction("Dangnhap", "Admin");
+            //}
+            //else
+            //{
+            //    HttpContext.Session.SetString("Name", HttpContext.Session.GetString("Name"));
+            //}
             return View();
         }
         //[Authentication]
@@ -253,8 +262,8 @@ namespace BTL_Web_Nhom7.Controllers
 
         public int splitId(string id)
         {
-            //KH002 
-            string res = id.Substring(2, id.Length-2);
+            //KH_35
+            string res = id.Substring(3, id.Length - 3);
             return int.Parse(res);
         }
 
@@ -266,6 +275,17 @@ namespace BTL_Web_Nhom7.Controllers
             ViewBag.lastId = lastId;
             return View(lastId);
         }
-
+        //public int splitId(string id)
+        //{
+        //    string digits = new string(id.Where(char.IsDigit).ToArray());
+        //    return int.Parse(digits);
+        //}
+        //public IActionResult DangKy()
+        //{
+        //    var lastCustomer = db.KhachHangs.ToList();
+        //    int lastId = splitId(lastCustomer.OrderByDescending(x => splitId(x.MaKh)).FirstOrDefault().MaKh.ToString());
+        //    ViewBag.lastId = lastId;
+        //    return View(lastId);
+        //}
     }
 }

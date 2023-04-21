@@ -22,16 +22,16 @@ namespace BTL_Web_Nhom7.Controllers
             }
             return sBuilder.ToString();
         }
+        // baatj cho toi cai controller phat
         [HttpPost]
         [Route("DangKy")]
         public bool DangKy(String MaKhachHang, String SoDienThoai,
             String Email, String TaiKhoan, String MatKhau)
         {
-            using (MD5 md5Hash = MD5.Create())
-            {
+           
                 TaiKhoan taikhoan = new TaiKhoan();
                 taikhoan.TenTaiKhoan = TaiKhoan;
-                taikhoan.Password = GetMd5Hash(md5Hash, MatKhau.ToString());
+                taikhoan.Password = MatKhau;
                 taikhoan.MaLoaiTaiKhoan = 1;
                 db.TaiKhoans.Add(taikhoan);
                 db.SaveChanges();
@@ -48,7 +48,7 @@ namespace BTL_Web_Nhom7.Controllers
                 db.KhachHangs.Add(khach);
                 db.SaveChanges();
                 return true;
-            }
+            
         }
     }
 }
