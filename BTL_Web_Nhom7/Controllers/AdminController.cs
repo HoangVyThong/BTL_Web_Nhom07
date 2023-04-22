@@ -48,8 +48,8 @@ namespace BTL_Web_Nhom7.Controllers
 
             if (HttpContext.Session.GetString("TenTaiKhoan") == null)
             {
-                var u = db.TaiKhoans.Where(x=>x.TenTaiKhoan.Equals(taikhoan.TenTaiKhoan) && x.Password.Equals(taikhoan.Password)).FirstOrDefault();
-                if(u != null)
+                var u = db.TaiKhoans.Where(x => x.TenTaiKhoan.Equals(taikhoan.TenTaiKhoan) && x.Password.Equals(taikhoan.Password)).FirstOrDefault();
+                if (u != null)
                 {
                     HttpContext.Session.SetString("TenTaiKhoan", u.TenTaiKhoan.ToString());
                     if (u.MaLoaiTaiKhoan == 1)
@@ -61,9 +61,9 @@ namespace BTL_Web_Nhom7.Controllers
                         return RedirectToAction("TrangChu", "Admin");
                     }
 
-                   
+
                 }
-               
+
             }
             return View();
 
@@ -87,25 +87,25 @@ namespace BTL_Web_Nhom7.Controllers
             //sql: select ChiTietHDB.SoHDB,TenKH, DienThoai, DiaChi,NgayLap,SUM(ThanhTien) as ThanhTien from ChiTietHDB join HoaDonBan on ChiTietHDB.SoHDB = HoaDonBan.SoHDB join KhachHang on KhachHang.MaKH = HoaDonBan.MaKH
             //group by ChiTietHDB.SoHDB,TenKH,DienThoai, DiaChi, NgayLap
             var result = (from c in db.ChiTietHdbs
-                         join h in db.HoaDonBans on c.SoHdb equals h.SoHdb
-                         join kh in db.KhachHangs on h.MaKh equals kh.MaKh
-                         group new { c, h, kh } by new
-                         {
-                             c.SoHdb,
-                             kh.TenKh,
-                             kh.DienThoai,
-                             kh.DiaChi,
-                             h.NgayLap
-                         } into g
-                         select new HoaDonDTO
-                         {
-                             SoHdb = g.Key.SoHdb,
-                             TenKh=g.Key.TenKh,
-                             DienThoai = g.Key.DienThoai,
-                             DiaChi = g.Key.DiaChi,
-                             NgayLap = g.Key.NgayLap,
-                             ThanhTien = g.Sum(x => x.c.ThanhTien)
-                         }).ToList();
+                          join h in db.HoaDonBans on c.SoHdb equals h.SoHdb
+                          join kh in db.KhachHangs on h.MaKh equals kh.MaKh
+                          group new { c, h, kh } by new
+                          {
+                              c.SoHdb,
+                              kh.TenKh,
+                              kh.DienThoai,
+                              kh.DiaChi,
+                              h.NgayLap
+                          } into g
+                          select new HoaDonDTO
+                          {
+                              SoHdb = g.Key.SoHdb,
+                              TenKh = g.Key.TenKh,
+                              DienThoai = g.Key.DienThoai,
+                              DiaChi = g.Key.DiaChi,
+                              NgayLap = g.Key.NgayLap,
+                              ThanhTien = g.Sum(x => x.c.ThanhTien)
+                          }).ToList();
             int pagesize = 20;
             int pagenumber = (page ?? 1) > pagesize ? (page ?? 1) : 1;
             if (result.Count == 0)
@@ -115,7 +115,7 @@ namespace BTL_Web_Nhom7.Controllers
             }
             return View(result.OrderByDescending(n => n.NgayLap).ToPagedList(pagenumber, pagesize));
         }
-        [Authentication]
+        
         [HttpPost]
         public IActionResult Danhsach(IFormCollection f, int? page)
         {
@@ -139,11 +139,10 @@ namespace BTL_Web_Nhom7.Controllers
             ViewBag.ThongBao = "Đã tìm thấy" + listThietBi.Count + "sản phẩm";
             return View(listThietBi.OrderBy(n => n.TenThietBi).ToPagedList(pagenumber, pagesize));
         }
-        [Authentication]
         [HttpGet]
         public IActionResult Danhsach(int? page, string MaLoai)
         {
-           var t = new List<LoaiThietBi>();
+            var t = new List<LoaiThietBi>();
             foreach (var i in db.LoaiThietBis.ToList().OrderBy(n => n.TenLoai))
             {
                 t.Add(i);
@@ -180,28 +179,39 @@ namespace BTL_Web_Nhom7.Controllers
             thietBis.OrderBy(x => x.TenThietBi).ToList();
             return View(thietBis);
         }
-        [Authentication]
-        public PartialViewResult PartialOpsitionLoai()
+        //[Authentication]
+        //public PartialViewResult PartialOpsitionLoai()
+        //{
+        //    return PartialView(db.LoaiThietBis.ToList());
+        //}
+        //public PartialViewResult PartialDanhSach(String MaThietbi = "TB11")
+        //{
+        //    var t = db.ThietBiYtes.Single(n => n.MaThietBi == MaThietbi);
+        //    if (t == null)
+        //    {
+        //        Response.StatusCode = 404;
+        //        return PartialView();
+        //    }
+        //    var loai = db.LoaiThietBis.SingleOrDefault(n => n.MaLoai == t.MaLoai);
+        //    ViewBag.LoaiThietBi = loai.TenLoai;
+        //    return PartialView(t);
+        //}
+
+        public IActionResult DanhSachSanPham()
         {
-            return PartialView(db.LoaiThietBis.ToList());
-        }
-        public PartialViewResult PartialDanhSach(String MaThietbi = "TB11")
-        {
-            var t = db.ThietBiYtes.Single(n => n.MaThietBi == MaThietbi);
-            if (t == null)
-            {
-                Response.StatusCode = 404;
-                return PartialView();
-            }
-            var loai = db.LoaiThietBis.SingleOrDefault(n => n.MaLoai == t.MaLoai);
-            ViewBag.LoaiThietBi = loai.TenLoai;
-            return PartialView(t);
+            return View(db.ThietBiYtes.ToList());
         }
         [Authentication]
         public IActionResult ThemSanPham()
         {
             ViewBag.MaLoai = new SelectList(db.LoaiThietBis.ToList().OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
             ViewBag.MaHang = new SelectList(db.HangThietBis.ToList().OrderBy(n => n.TenHang), "MaHang", "TenHang");
+            List<SelectListItem> items = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "1", Text = "True" },
+                new SelectListItem { Value = "0", Text = "False" }
+            };
+            ViewBag.An = items;
             int MaThietBi = db.ThietBiYtes.ToList().Count + 1;
             while (true)
             {
@@ -217,7 +227,7 @@ namespace BTL_Web_Nhom7.Controllers
         [Authentication]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ThemSanPham(ThietBiYte thietbi)
+        public IActionResult ThemSanPham([FromBody]ThietBiYte thietbi)
         {
             if (ModelState.IsValid)
             {
@@ -229,7 +239,7 @@ namespace BTL_Web_Nhom7.Controllers
             }
             return View(thietbi);
         }
-        [Authentication]
+       
         [HttpGet]
         public ActionResult SuaSanPham(string MaSP = "1")
         {
@@ -243,22 +253,27 @@ namespace BTL_Web_Nhom7.Controllers
                 return NotFound();
             }
             ViewBag.MaLoai = new SelectList(db.LoaiThietBis.ToList().OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
-            ViewBag.MaHang = new SelectList(db.HangThietBis.ToList().OrderBy(n => n.TenHang), "MaHang", "Ten");
-
+            ViewBag.MaHang = new SelectList(db.HangThietBis.ToList().OrderBy(n => n.TenHang), "MaHang", "TenHang");
+            List<SelectListItem> items = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "1", Text = "True" },
+                new SelectListItem { Value = "0", Text = "False" }
+            };
+            ViewBag.An = items;
             return View(thietbi);
         }
-        [Authentication]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SuaSanPham(ThietBiYte thietbi)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(thietbi).State = EntityState.Modified;
-                db.SaveChanges();
-            }
-            return RedirectToAction("TrangChu");
-        }
+        
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult SuaSanPham(ThietBiYte thietbi)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(thietbi).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //    }
+        //    return RedirectToAction("TrangChu");
+        //}
 
         public int splitId(string id)
         {

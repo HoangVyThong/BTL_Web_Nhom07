@@ -1,0 +1,159 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<BTL_Web_Nhom7.Models.ThietBiYte>
+
+@{
+    ViewData["Title"] = "DanhSachSanPham";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+@*<p>
+    <a asp-action="ThemSanPham">Thêm sản phẩm</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tên thiết bị
+            </th>
+            <th>
+               Giá bán
+            </th>
+            <th>
+                Số lượng
+            </th>
+            <th>
+                Tổng số sao 
+            </th>
+            <th>
+                Tổng số đánh giá
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+ 
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenThietBi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaBan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TongSoSao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TongSoDanhGia)
+            </td>
+            <td>
+                <a asp-action="SuaSanPham" asp-route-MaSP="@item.MaThietBi">Edit</a> |
+                <a asp-action="ChiTietSanPham" asp-route-id="@item.MaThietBi">Details</a> |
+                @{var url = "https://localhost:7120/api/AdminAPI/DeleteProduct?MaTB=" + item.MaThietBi;}
+                <a onclick="@url" href="#">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>*@
+<a onclick=""></a>
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetAllCustomers();
+    });
+    //Hàm lấy ra toàn bộ danh sách Khách Hàng. Dùng $.ajax() thực hiện method HTTP GET
+    function GetAllCustomers() {
+        var str = `<p>
+                <a href="/Admin/ThemSanPham">Thêm sản phẩm</a>
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Tên thiết bị
+                        </th>
+                        <th>
+                           Giá bán
+                        </th>
+                        <th>
+                            Số lượng
+                        </th>
+                        <th>
+                            Tổng số sao 
+                        </th>
+                        <th>
+                            Tổng số đánh giá
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>`
+       $.ajax({
+            url: "https://localhost:7120/api/AdminAPI/GetAllProduct",
+            method: "GET",
+            contentType: "json",
+            dataType: "json",
+            error: function (response) { },
+            success: function (reponse) {
+                    
+               $.each(reponse, function(key, val){
+                    
+                    str += `<tr>
+                    <td>
+                        ${val.tenThietBi}
+                    </td>
+                    <td>
+                        ${val.giaBan}
+                    </td>
+                    <td>
+                        ${val.soLuong}
+                    </td>
+                    <td>
+                        ${val.tongSoSao}
+                    </td>
+                    <td>
+                        ${val.tongSoDanhGia}
+                    </td>
+                    <td>
+                        
+                        <button onclick="window.location.href='/Admin/SuaSanPham?MaSP=${val.maThietBi}'">Edit</button> |
+                        <button onclick="window.location.href='/BanHang/ChiTietSanPham?MaSP=${val.maThietBi}'">Deltail</button> |
+                        <button onclick="DeleteProduct('${val.maThietBi}')">Delete</button>
+                    </td>
+                </tr>`
+             }),
+             str += '</tbody> </table>'
+              document.getElementById("displayProduct").innerHTML = str;
+            },
+            fail: function (response) { },
+        });
+    }
+    
+
+   
+</script>
+
+                        <script> function DeleteProduct(MaTB){
+        var url = 'https://localhost:7120/api/AdminAPI/DeleteProduct?MaTB=' + MaTB;
+
+        $.ajax({
+            url: url,
+            method: 'DELETE',
+            contentType: 'json',
+            dataType: 'json',
+            error: function (response) {
+                alert("Xóa không thành công");
+            },
+            success: function (reponse) {
+                alert("Xóa thành công");
+                window.location = "https://localhost:7120/Admin/DanhSachSanPham";
+            }
+        });
+    }</script>

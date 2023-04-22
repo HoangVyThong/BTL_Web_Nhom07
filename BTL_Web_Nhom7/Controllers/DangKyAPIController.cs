@@ -22,7 +22,7 @@ namespace BTL_Web_Nhom7.Controllers
             }
             return sBuilder.ToString();
         }
-        // baatj cho toi cai controller phat
+        
         [HttpPost]
         [Route("DangKy")]
         public bool DangKy(String MaKhachHang, String SoDienThoai,
