@@ -1,111 +1,125 @@
 ﻿@model BTL_Web_Nhom7.Models.ThietBiYte
 
 @{
-    ViewBag.Title = "SuaSanPham";
+    ViewData["Title"] = "SuaSanPham";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Sửa thiết bị (Mã: @Model.MaThietBi) </h2>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.MaThietBi)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MaLoai, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("MaLoai", (SelectList)ViewBag.MaLoai, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.MaLoai, "", new { @class = "text-danger" })
+<h1>Sửa sản phẩm có mã sản phẩm: @Model.MaThietBi</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SuaSanPham">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" id="MaTB" asp-for="MaThietBi" />
+            <div class="form-group">
+                <label asp-for="MaLoai" class="control-label"></label>
+                <select asp-for="MaLoai" id="MaLoai" class="form-control" asp-items="ViewBag.MaLoai"></select>
+                <span asp-validation-for="MaLoai" class="text-danger"></span>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MaHang, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("MaHang", (SelectList)ViewBag.MaHang, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.MaHang, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label asp-for="MaHang" class="control-label"></label>
+                <select asp-for="MaHang" id="MaHang" class="form-control" asp-items="ViewBag.MaHang"></select>
+                <span asp-validation-for="MaHang" class="text-danger"></span>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TenThietBi, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TenThietBi, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TenThietBi, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label asp-for="TenThietBi" class="control-label"></label>
+                <input asp-for="TenThietBi" id="TenTB" class="form-control" />
+                <span asp-validation-for="TenThietBi" class="text-danger"></span>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.GioiThieu, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.GioiThieu, new { htmlAttributes = new { @class = "form-control", placeholder = "Không quá 280 kí tự" } })
-                @Html.ValidationMessageFor(model => model.GioiThieu, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label asp-for="GioiThieu" class="control-label"></label>
+                <input asp-for="GioiThieu" id="GioiThieu" class="form-control" />
+                <span asp-validation-for="GioiThieu" class="text-danger"></span>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.GiaBan, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.GiaBan, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.GiaBan, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label asp-for="GiaBan" class="control-label"></label>
+                <input asp-for="GiaBan" id="GiaBan" class="form-control" />
+                <span asp-validation-for="GiaBan" class="text-danger"></span>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Anh, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="input-group">
-                    <span class="input-group-text">http://</span>
-                    @Html.EditorFor(model => model.Anh, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Anh, "", new { @class = "text-danger" })
-                </div>
-
+            <div class="form-group">
+                <label asp-for="Anh" class="control-label"></label>
+                <input asp-for="Anh" id="Anh" class="form-control" />
+                <span asp-validation-for="Anh" class="text-danger"></span>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ChiTiet, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.ChiTiet, new { htmlAttributes = new { @class = "form-control" }, @id = "ckeContent" })
-                <script>CKEDITOR.replace('ckeContent');</script>
+            <div class="form-group">
+                <label asp-for="ChiTiet" class="control-label"></label>
+                <input asp-for="ChiTiet" id="ChiTiet" class="form-control" />
+                <span asp-validation-for="ChiTiet" class="text-danger"></span>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.An, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.An)
-                    @Html.ValidationMessageFor(model => model.An, "", new { @class = "text-danger" })
-                </div>
+            <div class="form-group">
+                <label asp-for="An" class="control-label"></label>
+                <select asp-for="An" id="An" class="form-control" asp-items="ViewBag.An"></select>
+                <span asp-validation-for="An" class="text-danger"></span>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.GiamGia, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.GiamGia, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.GiamGia, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label asp-for="GiamGia" class="control-label"></label>
+                <input asp-for="GiamGia" id="GiamGia" class="form-control" />
+                <span asp-validation-for="GiamGia" class="text-danger"></span>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SoLuong, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SoLuong, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SoLuong, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label asp-for="SoLuong" class="control-label"></label>
+                <input asp-for="SoLuong" id="SoLuong" class="form-control" />
+                <span asp-validation-for="SoLuong" class="text-danger"></span>
             </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button type="submit" class="btn btn-primary" style="float: right!important;">sửa</button>
+            <div class="form-group">
+                <label asp-for="TongSoSao" class="control-label"></label>
+                <input asp-for="TongSoSao" id="TongSao" class="form-control" />
+                <span asp-validation-for="TongSoSao" class="text-danger"></span>
             </div>
-        </div>
+            <div class="form-group">
+                <label asp-for="TongSoDanhGia" class="control-label"></label>
+                <input asp-for="TongSoDanhGia" id="TongDanhGia" class="form-control" />
+                <span asp-validation-for="TongSoDanhGia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="button" onclick="SuaSanPham()" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
-}
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+ <script type="text/javascript">
+    
+    function SuaSanPham(){
+        var _an = true;
+        if(!parseInt($("#An").val())){
+            _an = false;
+        }
+        var data = {
+            maThietBi: $("#MaTB").val(),
+            maLoai: $("#MaLoai").val(),
+            maHang: $("#MaHang").val(),
+            tenThietBi: $("#TenTB").val(),
+            gioiThieu: $("#GioiThieu").val(),
+            giaBan: parseInt($("#GiaBan").val()),
+            anh: $("#Anh").val(),
+            chiTiet: $("#ChiTiet").val(),
+            an: _an,
+            giamGia: parseInt($("#GiamGia").val()),
+            soLuong: parseInt($("#SoLuong").val()),
+            tongSoSao: parseInt($("#TongSao").val()),
+            tongSoDanhGia:parseInt($("#TongDanhGia").val())
+        };
+        $.ajax({
+            type: "PUT",
+            url: "https://localhost:7120/api/AdminAPI/UpdateProduct",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                alert('Sửa thành công')
+                window.location = "https://localhost:7120/Admin/DanhSachSanPham";
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Sửa thất bại')
+                console.log("Error: " + errorThrown);
+            }
+        });
+    }
+</script>

@@ -1,79 +1,83 @@
-﻿@model BTL_Web_Nhom7.Models.ThietBiYte
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Newtonsoft.Json
+@model BTL_Web_Nhom7.Models.ThietBiYte
 
 @{
     ViewData["Title"] = "ThemSanPham";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+    crossorigin="anonymous"></script>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="ThemSanPham">
+        <form>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="MaThietBi" class="control-label"></label>
-                <input readonly="readonly" value="@ViewBag.MaThietBi" asp-for="MaThietBi" class="form-control" />
+                <input readonly="readonly" id="MaTB" value="@ViewBag.MaThietBi" asp-for="MaThietBi" class="form-control" />
                 <span asp-validation-for="MaThietBi" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="MaLoai" class="control-label"></label>
-                <select asp-for="MaLoai" class ="form-control" asp-items="ViewBag.MaLoai"></select>
+                <select asp-for="MaLoai" id="MaLoai" class ="form-control" asp-items="ViewBag.MaLoai"></select>
             </div>
             <div class="form-group">
                 <label asp-for="MaHang" class="control-label"></label>
-                <select asp-for="MaHang" class ="form-control" asp-items="ViewBag.MaHang"></select>
+                <select asp-for="MaHang" id="MaHang" class ="form-control" asp-items="ViewBag.MaHang"></select>
             </div>
             <div class="form-group">
                 <label asp-for="TenThietBi" class="control-label"></label>
-                <input asp-for="TenThietBi" class="form-control" />
+                <input asp-for="TenThietBi" id="TenTB" class="form-control" />
                 <span asp-validation-for="TenThietBi" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GioiThieu" class="control-label"></label>
-                <input asp-for="GioiThieu" class="form-control" />
+                <input asp-for="GioiThieu" id="GioiThieu" class="form-control" />
                 <span asp-validation-for="GioiThieu" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GiaBan" class="control-label"></label>
-                <input asp-for="GiaBan" class="form-control" />
+                <input asp-for="GiaBan" id="GiaBan" class="form-control" />
                 <span asp-validation-for="GiaBan" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Anh" class="control-label"></label>
-                <input asp-for="Anh" class="form-control" />
+                <input asp-for="Anh" id="Anh" class="form-control" />
                 <span asp-validation-for="Anh" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ChiTiet" class="control-label"></label>
-                <input asp-for="ChiTiet" class="form-control" />
+                <input asp-for="ChiTiet" id="ChiTiet" class="form-control" />
                 <span asp-validation-for="ChiTiet" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="An" class="control-label"></label>
-                <input asp-for="An" class="form-control" />
-                <span asp-validation-for="An" class="text-danger"></span>
+                <select asp-for="An" id="An" class="form-control" asp-items="@ViewBag.An"></select>
             </div>
+
             <div class="form-group">
                 <label asp-for="GiamGia" class="control-label"></label>
-                <input asp-for="GiamGia" class="form-control" />
+                <input asp-for="GiamGia" id="GiamGia" class="form-control" />
                 <span asp-validation-for="GiamGia" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="SoLuong" class="control-label"></label>
-                <input asp-for="SoLuong" class="form-control" />
+                <input asp-for="SoLuong" id="SoLuong" class="form-control" />
                 <span asp-validation-for="SoLuong" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TongSoSao" class="control-label"></label>
-                <input asp-for="TongSoSao" class="form-control" />
+                <input asp-for="TongSoSao" id="TongSao" class="form-control" />
                 <span asp-validation-for="TongSoSao" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TongSoDanhGia" class="control-label"></label>
-                <input asp-for="TongSoDanhGia" class="form-control" />
+                <input asp-for="TongSoDanhGia" id="TongDanhGia" class="form-control" />
                 <span asp-validation-for="TongSoDanhGia" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="button" onclick="ThemSanPham()" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -82,4 +86,44 @@
 <div>
     <a asp-action="TrangChu">Back to List</a>
 </div>
+
+<script type="text/javascript">
+    
+    function ThemSanPham(){
+        var _an = true;
+        if(!parseInt($("#An").val())){
+            _an = false;
+        }
+        var data = {
+            maThietBi: $("#MaTB").val(),
+            maLoai: $("#MaLoai").val(),
+            maHang: $("#MaHang").val(),
+            tenThietBi: $("#TenTB").val(),
+            gioiThieu: $("#GioiThieu").val(),
+            giaBan: parseInt($("#GiaBan").val()),
+            anh: $("#Anh").val(),
+            chiTiet: $("#ChiTiet").val(),
+            an: _an,
+            giamGia: parseInt($("#GiamGia").val()),
+            soLuong: parseInt($("#SoLuong").val()),
+            tongSoSao: parseInt($("#TongSao").val()),
+            tongSoDanhGia:parseInt($("#TongDanhGia").val())
+        };
+        $.ajax({
+            type: "POST",
+            url: "https://localhost:7120/api/AdminAPI/AddProduct",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                alert('Thêm thành công')
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert('Thêm thất bại')
+                console.log("Error: " + errorThrown);
+            }
+        });
+    }
+</script>
 
