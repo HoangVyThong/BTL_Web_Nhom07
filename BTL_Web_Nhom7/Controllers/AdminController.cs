@@ -68,6 +68,16 @@ namespace BTL_Web_Nhom7.Controllers
             return View();
 
         }
+
+        //public IActionResult LoginFacebook()
+        //{
+        //    return View();
+        //}
+
+        //public IActionResult LoginGoogle()
+        //{
+        //    return View();
+        //}
         //[Authentication]
         public IActionResult TrangChu()
         {

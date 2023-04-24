@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("8e5995c7-0a9d-45cf-ac29-95eb12d2fc8d")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("BTL_Web_Nhom7")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
