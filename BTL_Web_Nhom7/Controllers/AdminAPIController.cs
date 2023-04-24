@@ -1,4 +1,5 @@
 ﻿using BTL_Web_Nhom7.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,8 @@ namespace BTL_Web_Nhom7.Controllers
                 return true;
             }
         }
+
+        [Authorize]
         public IEnumerable<ThietBiYte> GetAllProduct()
         {
             return db.ThietBiYtes.ToList();

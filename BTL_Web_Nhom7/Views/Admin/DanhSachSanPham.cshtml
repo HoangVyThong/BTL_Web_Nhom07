@@ -70,6 +70,7 @@
     });
     //Hàm lấy ra toàn bộ danh sách Khách Hàng. Dùng $.ajax() thực hiện method HTTP GET
     function GetAllCustomers() {
+        //var token = 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6IlRob25nSFYiLCJUb2tlbklkIjoiZjc1Zjg1ZjEtNGEzZC00NTMxLThmNDUtNDIyYWU3NDllYmFlIiwibmJmIjoxNjgyMzI1NjEzLCJleHAiOjE2ODIzMzE2MTMsImlhdCI6MTY4MjMyNTYxM30.xKJTAO3leszasMubnJJHlpsCVRsraYCG_64smFeaDqBUf-crq6NEptHMsUAo1-cRAfl5md6Z2UXJ76M_schvAQ'
         var str = `<p>
                 <a href="/Admin/ThemSanPham">Thêm sản phẩm</a>
             </p>
@@ -96,10 +97,14 @@
                 </thead>
                 <tbody>`
        $.ajax({
+           
             url: "https://localhost:7120/api/AdminAPI/GetAllProduct",
             method: "GET",
             contentType: "json",
             dataType: "json",
+            //headers: {
+            //  "Authorization": "Bearer " + token
+            //},
             error: function (response) { },
             success: function (reponse) {
                     
