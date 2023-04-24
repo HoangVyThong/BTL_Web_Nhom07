@@ -11,6 +11,7 @@ namespace BTL_Web_Nhom7.Controllers
     public class AdminAPIController : ControllerBase
     {
         BtlApiContext db = new BtlApiContext();
+        [Authorize]
         [HttpPost]
         public bool AddProduct([FromBody] ThietBiYte thietBiYte)
         {
@@ -18,7 +19,7 @@ namespace BTL_Web_Nhom7.Controllers
             db.SaveChanges();
             return true;
         }
-
+        [Authorize]
         [HttpPut]
         public bool UpdateProduct([FromBody] ThietBiYte thietBiYte)
         {
@@ -26,7 +27,7 @@ namespace BTL_Web_Nhom7.Controllers
             db.SaveChanges();
             return true;
         }
-
+        [Authorize]
         [HttpDelete]
         public bool DeleteProduct(string MaTB)
         {

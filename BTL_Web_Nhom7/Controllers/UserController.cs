@@ -23,7 +23,7 @@ namespace BTL_Web_Nhom7.Controllers
             _appSettings = optionsMonitor.CurrentValue;
         }
         [HttpPost("Login")]
-        public IActionResult Validate(LoginModel login)
+        public IActionResult Validate([FromBody]LoginModel login)
         {
             var user = db.TaiKhoans.SingleOrDefault(p => p.TenTaiKhoan == login.UserName && p.Password == login.Password);
             if(user == null)
@@ -34,13 +34,21 @@ namespace BTL_Web_Nhom7.Controllers
                     Message = "Chưa đúng tài khoản mật khẩu"
                 });
             }
-            else
+            if(user.MaLoaiTaiKhoan == 1)
             {
-                HttpContext.Session.SetString("token", GenerateToken(user));
                 return Ok(new APIResponse
                 {
                     Success = true,
-                    Message = "Authenticate",
+                    Message = "Đăng nhập thành công với quyền User"
+                });
+            }
+            else
+            {
+
+                return Ok(new APIResponse
+                {
+                    Success = true,
+                    Message = "Đăng nhập thành công với quyền Admin",
                     Data = GenerateToken(user)
                 
                 });
