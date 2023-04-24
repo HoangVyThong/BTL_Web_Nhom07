@@ -45,29 +45,37 @@ namespace BTL_Web_Nhom7.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Dangnhap(TaiKhoan taikhoan)
         {
-
             if (HttpContext.Session.GetString("TenTaiKhoan") == null)
             {
-                var u = db.TaiKhoans.Where(x => x.TenTaiKhoan.Equals(taikhoan.TenTaiKhoan) && x.Password.Equals(taikhoan.Password)).FirstOrDefault();
-                if (u != null)
+                using (MD5 md5Hash = MD5.Create())
                 {
-                    HttpContext.Session.SetString("TenTaiKhoan", u.TenTaiKhoan.ToString());
-                    if (u.MaLoaiTaiKhoan == 1)
-                    {
-                        return RedirectToAction("TrangChu", "BanHang");
-                    }
-                    else
-                    {
-                        return RedirectToAction("TrangChu", "Admin");
-                    }
+                    // Mã hóa mật khẩu và tên tài khoản bằng MD5
+                    string hashedPassword = GetMd5Hash(md5Hash, taikhoan.Password);
+                   
+                    // Tìm tài khoản trong cơ sở dữ liệu
+                    var u = db.TaiKhoans
+                        .Where(x => x.TenTaiKhoan.Equals(taikhoan.TenTaiKhoan) && x.Password.Equals(hashedPassword))
+                        .FirstOrDefault();
 
+                    if (u != null)
+                    {
+                        // Lưu tên tài khoản vào Session
+                        HttpContext.Session.SetString("TenTaiKhoan", u.TenTaiKhoan.ToString());
 
+                        if (u.MaLoaiTaiKhoan == 1)
+                        {
+                            return RedirectToAction("TrangChu", "BanHang");
+                        }
+                        else
+                        {
+                            return RedirectToAction("TrangChu", "Admin");
+                        }
+                    }
                 }
-
             }
             return View();
-
         }
+
         //[Authentication]
         public IActionResult TrangChu()
         {

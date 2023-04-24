@@ -285,23 +285,27 @@
             errorConfirmPassword.innerHTML = "";
         }
         
-
-        var url = 'https://localhost:7120/api/DangKyAPI/DangKy?makhachhang=' + idCustomer + '&sodienthoai='+inputPhoneNumber+
-        '&email='+ inputEmail +'&taikhoan='+inputUsername+'&matkhau=' + inputPassword;
-        $.ajax({
-            url: url,
-            method: 'POST',
-            contentType: 'json',
-            dataType: 'json',
-            error: function (response) {
-                errorUsername.innerHTML = "Tài khoản này đã tồn tại";
-                alert("Đăng ký không thành công");
-            },
-            success: function (reponse) {
-                alert("Đăng ký thành công");
-               window.location = "https://localhost:7120/Admin/DangNhap";
-            }
-        });
+var url = 'https://localhost:7120/api/DangKyAPI/DangKy?makhachhang=' + idCustomer + '&sodienthoai='+inputPhoneNumber+'&email='+ inputEmail +'&taikhoan='+inputUsername+'&matkhau=' + inputPassword;
+$.ajax({
+    url: url,
+    method: 'POST',
+    contentType: 'json',
+    dataType: 'text',
+    success: function(response) {
+        if (response.trim() === 'success') {
+            alert('Đăng ký thành công');
+            window.location = 'https://localhost:7120/Admin/DangNhap';
+        } else {
+            alert('Đăng ký không thành công. Lỗi: ' + response);
+        }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR);
+        console.log(textStatus);
+        console.log(errorThrown);
+        alert('Đăng ký không thành công. Lỗi: ' + errorThrown);
+    }
+});
 
 
 
