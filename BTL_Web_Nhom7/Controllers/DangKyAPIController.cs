@@ -25,13 +25,20 @@ namespace BTL_Web_Nhom7.Controllers
         
         [HttpPost]
         [Route("DangKy")]
-        public bool DangKy(String MaKhachHang, String SoDienThoai,
-            String Email, String TaiKhoan, String MatKhau)
+        public string DangKy(String MaKhachHang, String SoDienThoai, String Email, String TaiKhoan, String MatKhau)
         {
-           
+            using (MD5 md5Hash = MD5.Create())
+            {
+                // Kiểm tra xem tài khoản đã tồn tại chưa
+                if (db.TaiKhoans.Any(tk => tk.TenTaiKhoan == TaiKhoan))
+                {
+                    // Nếu đã tồn tại tài khoản, trả về thông báo lỗi
+                    return "da_ton_tai_tai_khoan";
+                }
+
                 TaiKhoan taikhoan = new TaiKhoan();
                 taikhoan.TenTaiKhoan = TaiKhoan;
-                taikhoan.Password = MatKhau;
+                taikhoan.Password = GetMd5Hash(md5Hash, MatKhau.ToString());
                 taikhoan.MaLoaiTaiKhoan = 1;
                 db.TaiKhoans.Add(taikhoan);
                 db.SaveChanges();
@@ -47,8 +54,10 @@ namespace BTL_Web_Nhom7.Controllers
                 khach.TenTaiKhoan = TaiKhoan;
                 db.KhachHangs.Add(khach);
                 db.SaveChanges();
-                return true;
-            
+
+                // Nếu đăng ký thành công, trả về chuỗi thông báo thành công
+                return "success";
+            }
         }
     }
 }
